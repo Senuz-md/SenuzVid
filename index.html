@@ -1,10 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-
-  <!-- Mobile friendly -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
 
   <!-- SEO Description -->
   <meta name="description" content="SenuzVid is a free online TikTok video downloader and MP3/MP4 converter. Download TikTok videos in HD, Full HD, 4K quality or extract MP3 audio instantly without watermark. Fast, secure, unlimited downloads with no registration required." />
@@ -26,215 +24,242 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://senuzvid.netlify.app/" />
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>SenuzVid — Christmas Edition 🎄</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root {
-  --tiktok-cyan: #00f2ea;
-  --tiktok-pink: #ff0050;
-  --bg-dark: #0f172a;
-  --glass: rgba(30, 41, 59, 0.7);
-  --border: rgba(255, 255, 255, 0.12);
+  --xmas-red: #ef4444;
+  --xmas-green: #22c55e;
+  --bg-dark: #050810;
+  --glass: rgba(15, 23, 42, 0.92);
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
 
 body {
   margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: #fff;
-  min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px;
-  overflow-x: hidden;
+  min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 10px;
+  overflow: hidden; position: relative;
 }
 
-/* Premium Aurora Background */
-.aurora { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-.blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 10s infinite alternate ease-in-out; }
-.b1 { background: var(--tiktok-cyan); width: 350px; height: 350px; top: -100px; left: -100px; }
-.b2 { background: var(--tiktok-pink); width: 300px; height: 300px; bottom: -80px; right: -80px; animation-delay: -3s; }
-@keyframes float { to { transform: translate(30px, 50px) scale(1.1); } }
+/* Background Decorations */
+.decor { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+.blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.25; animation: float 12s infinite alternate; }
+.b1 { background: var(--xmas-red); width: 350px; height: 350px; top: -50px; left: -50px; }
+.b2 { background: var(--xmas-green); width: 300px; height: 300px; bottom: -50px; right: -50px; }
+@keyframes float { to { transform: translate(30px, 40px) scale(1.1); } }
 
-/* Main Glass Card */
-.container { width: 100%; max-width: 650px; }
+/* --- ENHANCED SNOW EFFECT --- */
+#snow-box { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.flake { 
+    position: absolute; 
+    top: -15px; 
+    background: white; 
+    border-radius: 50%; 
+    opacity: 0.9; 
+    filter: drop-shadow(0 0 5px white); /* හිම කැටේ දිලිසෙන ගතිය */
+    animation: fall linear forwards; 
+}
+@keyframes fall {
+    0% { transform: translateY(-10px) translateX(0) rotate(0deg); }
+    100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0.3; }
+}
+/* -------------------------- */
+
+.app { width: 100%; max-width: 600px; z-index: 10; }
 .card {
   background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-  border: 1px solid var(--border); border-radius: 35px; padding: 45px 25px;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6); text-align: center; position: relative;
+  border: 1px solid var(--border); border-radius: 35px; padding: 35px 20px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8); text-align: center; position: relative;
 }
 
-.brand { font-size: clamp(35px, 9vw, 48px); font-weight: 800; background: linear-gradient(135deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0; }
-.tagline { color: #888; font-size: 11px; letter-spacing: 4px; font-weight: 600; text-transform: uppercase; margin-top: 5px; }
+.brand { font-size: clamp(32px, 9vw, 48px); font-weight: 800; margin: 0; }
+.brand span { color: var(--xmas-red); text-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+.brand i { color: var(--xmas-green); font-size: 0.7em; margin-left: 5px; }
 
-/* Dynamic TikTok Badge */
-.social-badge {
-    display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05);
-    padding: 8px 18px; border-radius: 50px; border: 1px solid var(--border); margin-top: 15px;
-    font-size: 13px; font-weight: 600; color: var(--tiktok-cyan);
+.sub { color: #888; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin: 8px 0 25px 0; font-weight: 600; }
+
+.xmas-badge {
+    display: inline-flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.15);
+    padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(239, 68, 68, 0.3);
+    margin-bottom: 25px; color: #fca5a5; font-size: 13px; font-weight: 600;
 }
-.social-badge i { color: #fff; font-size: 16px; text-shadow: -1px -1px 0 var(--tiktok-cyan), 1px 1px 0 var(--tiktok-pink); }
 
-/* Search Area */
-.search-wrapper {
-  background: rgba(0,0,0,0.3); border-radius: 20px; padding: 6px; border: 2px solid var(--border);
-  display: flex; align-items: center; gap: 5px; margin: 30px 0 15px 0;
+.box {
+  background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; border: 2px solid var(--border);
+  display: flex; align-items: center; gap: 5px; margin-bottom: 15px;
 }
-.input-box { flex: 1; background: transparent; border: none; padding: 12px; color: #fff; font-size: 16px; font-family: inherit; min-width: 0; }
-.btn-paste { color: #94a3b8; padding: 10px; cursor: pointer; background: none; border: none; font-size: 18px; }
-.btn-get { background: #fff; color: #000; border: none; padding: 0 25px; height: 48px; border-radius: 15px; font-weight: 800; cursor: pointer; flex-shrink: 0; }
-.btn-get:hover { background: var(--tiktok-cyan); }
+.box:focus-within { border-color: var(--xmas-green); }
+.input { flex: 1; background: transparent; border: none; padding: 12px; color: #fff; font-size: 16px; font-family: inherit; width: 100%; }
+.paste { color: #888; cursor: pointer; padding: 10px; font-size: 20px; background: none; border: none; }
+.get { background: var(--xmas-red); color: #fff; border: none; padding: 0 25px; height: 50px; border-radius: 15px; font-weight: 800; cursor: pointer; }
 
-/* Wifi Status */
-.status-bar { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: #4ade80; margin-bottom: 20px; font-weight: 600; }
-.wifi-anim { animation: blink 1.5s infinite; }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+/* WiFi Active Glow */
+.status { font-size: 12px; color: var(--xmas-green); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.wifi-active {
+    color: var(--xmas-green);
+    text-shadow: 0 0 10px var(--xmas-green);
+    animation: wifi-pulse 1.5s infinite;
+}
+@keyframes wifi-pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
 
-/* Result Section */
-.preview-box { background: rgba(0,0,0,0.25); border-radius: 28px; padding: 20px; border: 1px solid var(--border); display: none; animation: slideUp 0.5s ease; }
+.preview { background: rgba(255,255,255,0.04); border-radius: 25px; padding: 20px; border: 1px solid var(--border); display: none; animation: slideUp 0.5s ease; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-.v-content { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-.thumb { width: 100%; max-width: 140px; border-radius: 18px; aspect-ratio: 9/16; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-.v-details { flex: 1; width: 100%; text-align: center; }
-.v-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 5px; line-height: 1.4; }
-.v-author { font-size: 13px; color: var(--tiktok-cyan); font-weight: 700; background: rgba(0, 242, 234, 0.1); padding: 4px 12px; border-radius: 8px; display: inline-block; margin-bottom: 15px; }
+.v-flex { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+.v-img { width: 120px; aspect-ratio: 9/16; border-radius: 15px; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.v-info { flex: 1; width: 100%; }
+.v-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.4; }
+.v-user { color: var(--xmas-green); font-weight: 800; font-size: 12px; margin-bottom: 15px; display: inline-block; background: rgba(34, 197, 94, 0.15); padding: 4px 12px; border-radius: 8px; }
 
-/* Download Grid */
 .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.dl-btn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-.dl-btn:hover { background: var(--tiktok-pink); transform: translateY(-2px); border-color: transparent; }
-.dl-btn.audio { background: #334155; grid-column: span 2; }
+.btn-dl { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+.btn-dl:hover { background: var(--xmas-green); transform: translateY(-2px); }
+.btn-dl.mp3 { background: var(--xmas-red); grid-column: span 2; }
 
-/* Footer */
-.card-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: #555; }
-.senuz { color: #fff; font-weight: 600; }
+.foot { margin-top: 35px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; font-size: 13px; color: #555; }
+.senuz { color: #fff; font-weight: 700; }
 
-/* Floating Music */
-.music-trigger {
-  position: fixed; bottom: 25px; right: 25px; width: 48px; height: 48px; border-radius: 50%;
-  background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border);
-  color: var(--tiktok-pink); display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 100;
+.music {
+  position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%;
+  background: var(--xmas-red); color: #fff; display: flex; justify-content: center; align-items: center;
+  cursor: pointer; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5); z-index: 100; font-size: 20px; border: none;
 }
 
-@media (min-width: 550px) {
-  .v-content { flex-direction: row; text-align: left; }
-  .v-details { text-align: left; }
+@media (min-width: 500px) {
+  .v-flex { flex-direction: row; text-align: left; }
   .grid { grid-template-columns: repeat(3, 1fr); }
-  .dl-btn.audio { grid-column: span 1; }
+  .btn-dl.mp3 { grid-column: span 1; }
 }
 </style>
 </head>
 <body>
 
-<div class="aurora">
+<div class="decor">
   <div class="blob b1"></div>
   <div class="blob b2"></div>
 </div>
 
-<div class="container">
+<div id="snow-box"></div>
+
+<div class="app">
     <div class="card">
-        <h1 class="brand">SenuzVid</h1>
-        <p class="tagline">Premium TikTok Downloader</p>
+        <h1 class="brand">Senuz<span>Vid</span> <i class="fa-solid fa-tree"></i></h1>
+        <p class="sub">Premium tiktok video downloader</p>
 
-        <div class="social-badge">
-            <i class="fa-brands fa-tiktok"></i>
-            <span>TikTok Multimedia Support</span>
+        <div class="xmas-badge">
+            <i class="fa-solid fa-gift"></i>
+            <span>Merry Christmas & Happy Downloading!</span>
         </div>
 
-        <div class="search-wrapper">
-            <input id="url" class="input-box" placeholder="Paste link here..." autocomplete="off">
-            <button id="paste" class="btn-paste"><i class="fa-regular fa-clipboard"></i></button>
-            <button id="get" class="btn-get">GET</button>
+        <div class="box">
+            <input id="url" class="input" placeholder="Paste link here..." autocomplete="off">
+            <button id="paste" class="paste"><i class="fa-regular fa-clipboard"></i></button>
+            <button id="get" class="get">GET</button>
         </div>
 
-        <div class="status-bar">
-            <i class="fa-solid fa-wifi wifi-anim"></i>
-            <span>Server Connected</span>
+        <div class="status">
+            <i class="fa-solid fa-wifi wifi-active"></i>
+            <span>Santa's Server Connected</span>
         </div>
 
-        <div id="loader" style="font-size:12px; color:#888; margin-bottom:10px;"></div>
+        <div id="loading" style="font-size:12px; color:#666; margin-bottom:10px;"></div>
 
-        <div id="preview" class="preview-box">
-            <div class="v-content">
-                <img id="vThumb" class="thumb" src="" alt="">
-                <div class="v-details">
-                    <p id="vTitle" class="v-title">Video Title</p>
-                    <div id="vAuthor" class="v-author">@creator</div>
+        <div id="preview" class="preview">
+            <div class="v-flex">
+                <img id="thumb" class="v-img" src="" alt="">
+                <div class="v-info">
+                    <p id="title" class="v-title">Video Title</p>
+                    <span id="author" class="v-user">@creator</span>
                     <div class="grid">
-                        <button class="dl-btn" onclick="dl('4k')">4K ULTRA</button>
-                        <button class="dl-btn" onclick="dl('2k')">2K QHD</button>
-                        <button class="dl-btn" onclick="dl('1080p')">1080p FHD</button>
-                        <button class="dl-btn" onclick="dl('720p')">720p HD</button>
-                        <button class="dl-btn" onclick="dl('480p')">480p</button>
-                        <button class="dl-btn" onclick="dl('360p')">360p</button>
-                        <button class="dl-btn audio" onclick="dl('audio')">DOWNLOAD MP3</button>
+                        <button class="btn-dl" onclick="dl('4k')">4K ULTRA</button>
+                        <button class="btn-dl" onclick="dl('2k')">2K QHD</button>
+                        <button class="btn-dl" onclick="dl('1080p')">1080p FHD</button>
+                        <button class="btn-dl" onclick="dl('720p')">720p HD</button>
+                        <button class="btn-dl" onclick="dl('480p')">480p</button>
+                        <button class="btn-dl" onclick="dl('360p')">360p</button>
+                        <button class="btn-dl mp3" onclick="dl('audio')">DOWNLOAD MP3</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="card-footer">
+        <div class="foot">
             ᴘᴏᴡᴇʀᴅ ʙʏ┋<span class="senuz">© ꜱᴇɴᴜᴢ ⑉〆</span>
         </div>
     </div>
 </div>
 
-<button id="musicToggle" class="music-trigger"><i class="fa-solid fa-music"></i></button>
+<button id="musicToggle" class="music"><i class="fa-solid fa-music"></i></button>
 <audio id="player" loop><source src="https://files.catbox.moe/6id5fz.mp3" type="audio/mpeg"></audio>
 
 <script>
+// Improved Snow Logic
+function createSnow() {
+    const box = document.getElementById('snow-box');
+    const flake = document.createElement('div');
+    flake.classList.add('flake');
+    
+    // Randomize properties for more visibility
+    const size = Math.random() * 6 + 3; // 3px to 9px (Bigger)
+    flake.style.left = Math.random() * 100 + '%';
+    flake.style.width = size + 'px';
+    flake.style.height = size + 'px';
+    flake.style.animationDuration = Math.random() * 4 + 5 + 's';
+    
+    box.appendChild(flake);
+    setTimeout(() => { flake.remove(); }, 8000);
+}
+setInterval(createSnow, 150); // Increased frequency
+
 const API = "https://senuzvid-backend-5f903ce3cfc8.herokuapp.com";
-let link = "";
+let currentUrl = "";
 
 document.getElementById('paste').addEventListener('click', async () => {
-    const text = await navigator.clipboard.readText();
-    document.getElementById('url').value = text;
+    try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById('url').value = text;
+    } catch(e) { alert("Clipboard access denied"); }
 });
 
 document.getElementById('get').addEventListener('click', async () => {
     const val = document.getElementById('url').value.trim();
-    if(!val.includes('tiktok.com')) return alert("Please enter a valid TikTok link!");
+    if(!val.includes('tiktok.com')) return alert("Invalid TikTok Link!");
 
-    link = val;
+    currentUrl = val;
     const btn = document.getElementById('get');
-    const loader = document.getElementById('loader');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-    loader.innerText = "Connecting to TikTok Server...";
+    const load = document.getElementById('loading');
+    btn.innerHTML = '<i class="fa-solid fa-snowflake fa-spin"></i>';
+    load.innerText = "Santa is analyzing...";
 
     try {
         const res = await fetch(`${API}/api/details?url=${encodeURIComponent(val)}`);
         const data = await res.json();
-        
-        document.getElementById('vThumb').src = data.thumbnail || data.cover || '';
-        document.getElementById('vTitle').innerText = (data.title || "TikTok Video").substring(0, 50) + "...";
-        
-        // Correcting Author Display
-        const author = data.author_name || data.author || "tiktok_creator";
-        document.getElementById('vAuthor').innerText = author.startsWith('@') ? author : "@" + author;
-        
+        document.getElementById('thumb').src = data.thumbnail || data.cover || '';
+        document.getElementById('title').innerText = (data.title || "TikTok Video").substring(0, 45) + "...";
+        document.getElementById('author').innerText = "@" + (data.author_name || data.author || "creator");
         document.getElementById('preview').style.display = 'block';
-        loader.innerText = "";
-    } catch(e) {
-        loader.innerText = "Error loading data!";
-    } finally {
-        btn.innerText = "GET";
-    }
+        load.innerText = "";
+    } catch(e) { load.innerText = "Error Loading!"; }
+    finally { btn.innerText = "GET"; }
 });
 
 function dl(q) {
-    if(!link) return;
-    window.open(`${API}/api/download?url=${encodeURIComponent(link)}&quality=${q}`, '_blank');
+    if(!currentUrl) return;
+    window.open(`${API}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
 }
 
 const mBtn = document.getElementById('musicToggle');
-const player = document.getElementById('player');
+const audio = document.getElementById('player');
 mBtn.addEventListener('click', () => {
-    if(player.paused) {
-        player.play(); mBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-    } else {
-        player.pause(); mBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
-    }
+    if(audio.paused) { audio.play(); mBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; }
+    else { audio.pause(); mBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; }
 });
 </script>
 
 </body>
-</html>
+                                                                                      </html>
