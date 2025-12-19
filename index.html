@@ -42,18 +42,19 @@
 
 body {
   margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: #fff;
-  min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 10px;
-  overflow: hidden; position: relative;
+  min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px 10px;
+  overflow-x: hidden; /* Scroll enabled now */
+  position: relative;
 }
 
 /* Background Decorations */
 .decor { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
 .blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.25; animation: float 12s infinite alternate; }
-.b1 { background: var(--xmas-red); width: 350px; height: 350px; top: -50px; left: -50px; }
-.b2 { background: var(--xmas-green); width: 300px; height: 300px; bottom: -50px; right: -50px; }
+.b1 { background: var(--xmas-red); width: 300px; height: 300px; top: -50px; left: -50px; }
+.b2 { background: var(--xmas-green); width: 250px; height: 250px; bottom: -50px; right: -50px; }
 @keyframes float { to { transform: translate(30px, 40px) scale(1.1); } }
 
-/* --- ENHANCED SNOW EFFECT --- */
+/* Snow Effect */
 #snow-box { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 .flake { 
     position: absolute; 
@@ -61,23 +62,22 @@ body {
     background: white; 
     border-radius: 50%; 
     opacity: 0.9; 
-    filter: drop-shadow(0 0 5px white); /* හිම කැටේ දිලිසෙන ගතිය */
+    filter: drop-shadow(0 0 5px white);
     animation: fall linear forwards; 
 }
 @keyframes fall {
-    0% { transform: translateY(-10px) translateX(0) rotate(0deg); }
-    100% { transform: translateY(110vh) translateX(50px) rotate(360deg); opacity: 0.3; }
+    0% { transform: translateY(-10px) translateX(0); }
+    100% { transform: translateY(110vh) translateX(50px); opacity: 0.3; }
 }
-/* -------------------------- */
 
-.app { width: 100%; max-width: 600px; z-index: 10; }
+.app { width: 100%; max-width: 600px; z-index: 10; margin: auto; }
 .card {
   background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
   border: 1px solid var(--border); border-radius: 35px; padding: 35px 20px;
   box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8); text-align: center; position: relative;
 }
 
-.brand { font-size: clamp(32px, 9vw, 48px); font-weight: 800; margin: 0; }
+.brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; }
 .brand span { color: var(--xmas-red); text-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
 .brand i { color: var(--xmas-green); font-size: 0.7em; margin-left: 5px; }
 
@@ -86,54 +86,54 @@ body {
 .xmas-badge {
     display: inline-flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.15);
     padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(239, 68, 68, 0.3);
-    margin-bottom: 25px; color: #fca5a5; font-size: 13px; font-weight: 600;
+    margin-bottom: 25px; color: #fca5a5; font-size: 12px; font-weight: 600; max-width: 95%;
 }
 
 .box {
-  background: rgba(0,0,0,0.5); border-radius: 20px; padding: 6px; border: 2px solid var(--border);
+  background: rgba(0,0,0,0.5); border-radius: 18px; padding: 5px; border: 2px solid var(--border);
   display: flex; align-items: center; gap: 5px; margin-bottom: 15px;
 }
 .box:focus-within { border-color: var(--xmas-green); }
-.input { flex: 1; background: transparent; border: none; padding: 12px; color: #fff; font-size: 16px; font-family: inherit; width: 100%; }
-.paste { color: #888; cursor: pointer; padding: 10px; font-size: 20px; background: none; border: none; }
-.get { background: var(--xmas-red); color: #fff; border: none; padding: 0 25px; height: 50px; border-radius: 15px; font-weight: 800; cursor: pointer; }
+.input { flex: 1; background: transparent; border: none; padding: 12px; color: #fff; font-size: 15px; font-family: inherit; width: 100%; min-width: 0; }
+.paste { color: #888; cursor: pointer; padding: 10px; font-size: 18px; background: none; border: none; }
+.get { background: var(--xmas-red); color: #fff; border: none; padding: 0 22px; height: 48px; border-radius: 14px; font-weight: 800; cursor: pointer; flex-shrink: 0; }
 
-/* WiFi Active Glow */
-.status { font-size: 12px; color: var(--xmas-green); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.status { font-size: 11px; color: var(--xmas-green); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .wifi-active {
     color: var(--xmas-green);
     text-shadow: 0 0 10px var(--xmas-green);
     animation: wifi-pulse 1.5s infinite;
 }
-@keyframes wifi-pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes wifi-pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.1); } 100% { opacity: 1; transform: scale(1); } }
 
-.preview { background: rgba(255,255,255,0.04); border-radius: 25px; padding: 20px; border: 1px solid var(--border); display: none; animation: slideUp 0.5s ease; }
+.preview { background: rgba(255,255,255,0.04); border-radius: 25px; padding: 15px; border: 1px solid var(--border); display: none; animation: slideUp 0.5s ease; margin-top: 10px; }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-.v-flex { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-.v-img { width: 120px; aspect-ratio: 9/16; border-radius: 15px; object-fit: cover; border: 2px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.v-flex { display: flex; flex-direction: column; gap: 15px; align-items: center; }
+.v-img { width: 110px; aspect-ratio: 9/16; border-radius: 12px; object-fit: cover; border: 2px solid var(--border); }
 .v-info { flex: 1; width: 100%; }
-.v-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.4; }
-.v-user { color: var(--xmas-green); font-weight: 800; font-size: 12px; margin-bottom: 15px; display: inline-block; background: rgba(34, 197, 94, 0.15); padding: 4px 12px; border-radius: 8px; }
+.v-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.4; }
+.v-user { color: var(--xmas-green); font-weight: 800; font-size: 12px; margin-bottom: 15px; display: inline-block; background: rgba(34, 197, 94, 0.15); padding: 4px 10px; border-radius: 8px; }
 
 .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.btn-dl { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-.btn-dl:hover { background: var(--xmas-green); transform: translateY(-2px); }
+.btn-dl { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; }
+.btn-dl:hover { background: var(--xmas-green); }
 .btn-dl.mp3 { background: var(--xmas-red); grid-column: span 2; }
 
-.foot { margin-top: 35px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; font-size: 13px; color: #555; }
+.foot { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; font-size: 12px; color: #555; }
 .senuz { color: #fff; font-weight: 700; }
 
 .music {
-  position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%;
+  position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%;
   background: var(--xmas-red); color: #fff; display: flex; justify-content: center; align-items: center;
-  cursor: pointer; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5); z-index: 100; font-size: 20px; border: none;
+  cursor: pointer; box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4); z-index: 100; font-size: 18px; border: none;
 }
 
 @media (min-width: 500px) {
   .v-flex { flex-direction: row; text-align: left; }
   .grid { grid-template-columns: repeat(3, 1fr); }
   .btn-dl.mp3 { grid-column: span 1; }
+  .v-img { width: 130px; }
 }
 </style>
 </head>
@@ -149,7 +149,7 @@ body {
 <div class="app">
     <div class="card">
         <h1 class="brand">Senuz<span>Vid</span> <i class="fa-solid fa-tree"></i></h1>
-        <p class="sub">Premium tiktok video downloader</p>
+        <p class="sub">Premium Tiktok Video Downloader</p>
 
         <div class="xmas-badge">
             <i class="fa-solid fa-gift"></i>
@@ -167,7 +167,7 @@ body {
             <span>Santa's Server Connected</span>
         </div>
 
-        <div id="loading" style="font-size:12px; color:#666; margin-bottom:10px;"></div>
+        <div id="loading" style="font-size:11px; color:#666; margin-bottom:10px;"></div>
 
         <div id="preview" class="preview">
             <div class="v-flex">
@@ -198,23 +198,19 @@ body {
 <audio id="player" loop><source src="https://files.catbox.moe/6id5fz.mp3" type="audio/mpeg"></audio>
 
 <script>
-// Improved Snow Logic
 function createSnow() {
     const box = document.getElementById('snow-box');
     const flake = document.createElement('div');
     flake.classList.add('flake');
-    
-    // Randomize properties for more visibility
-    const size = Math.random() * 6 + 3; // 3px to 9px (Bigger)
+    const size = Math.random() * 6 + 3;
     flake.style.left = Math.random() * 100 + '%';
     flake.style.width = size + 'px';
     flake.style.height = size + 'px';
     flake.style.animationDuration = Math.random() * 4 + 5 + 's';
-    
     box.appendChild(flake);
     setTimeout(() => { flake.remove(); }, 8000);
 }
-setInterval(createSnow, 150); // Increased frequency
+setInterval(createSnow, 200);
 
 const API = "https://senuzvid-backend-5f903ce3cfc8.herokuapp.com";
 let currentUrl = "";
@@ -229,13 +225,11 @@ document.getElementById('paste').addEventListener('click', async () => {
 document.getElementById('get').addEventListener('click', async () => {
     const val = document.getElementById('url').value.trim();
     if(!val.includes('tiktok.com')) return alert("Invalid TikTok Link!");
-
     currentUrl = val;
     const btn = document.getElementById('get');
     const load = document.getElementById('loading');
     btn.innerHTML = '<i class="fa-solid fa-snowflake fa-spin"></i>';
-    load.innerText = "Santa is analyzing...";
-
+    load.innerText = "Santa is checking...";
     try {
         const res = await fetch(`${API}/api/details?url=${encodeURIComponent(val)}`);
         const data = await res.json();
@@ -262,4 +256,4 @@ mBtn.addEventListener('click', () => {
 </script>
 
 </body>
-                                                                                      </html>
+</html>
