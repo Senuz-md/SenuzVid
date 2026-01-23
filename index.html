@@ -4,20 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
 
-  <meta name="description" content="SenuzVid is a free online TikTok video downloader and MP3/MP4 converter. Download TikTok videos in HD, Full HD, 4K quality or extract MP3 audio instantly without watermark. Fast, secure, unlimited downloads with no registration required." />
-
+  <meta name="description" content="SenuzVid is a free online TikTok video downloader and MP3/MP4 converter." />
   <title>SenuzVid – TikTok Video Downloader & MP3 Converter</title>
-
-  <meta name="google-site-verification" content="L9JZ_BZBFHEkVzMgw6LhnXJyh9Bfa0tORGAK1EbA0FY" />
 
   <link rel="icon" href="https://files.catbox.moe/1dlcmm.jpg" type="image/png" />
   <link rel="apple-touch-icon" href="https://files.catbox.moe/lgzi2f.jpg" />
-
-  <meta property="og:title" content="SenuzVid – TikTok Video Downloader" />
-  <meta property="og:description" content="Download TikTok videos in MP4 or MP3 format instantly with SenuzVid. No watermark, no signup." />
-  <meta property="og:image" content="https://files.catbox.moe/1dlcmm.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://senuzvid.netlify.app/" />
 
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -32,18 +23,61 @@
       --border: rgba(255, 215, 0, 0.2);
     }
 
+    .theme-red { --ny-gold: #ff4757; --ny-orange: #ff6b81; --border: rgba(255, 71, 87, 0.2); }
+    .theme-purple { --ny-gold: #a55eea; --ny-orange: #8854d0; --border: rgba(165, 94, 234, 0.2); }
+    .theme-blue { --ny-gold: #3498db; --ny-orange: #2980b9; --border: rgba(52, 152, 219, 0.2); }
+    .theme-yellow { --ny-gold: #ffd700; --ny-orange: #f39c12; --border: rgba(255, 215, 0, 0.2); }
+
     * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
 
     body {
       margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: #fff;
-      min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px 10px;
-      overflow-x: hidden; position: relative;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 10px;
+      overflow-x: hidden; position: relative; transition: 0.5s;
     }
 
-    /* 🎇 Original Style Decorations */
+    /* ☰ Hamburger Menu Icon */
+    .nav-header {
+      position: fixed; top: 0; left: 0; width: 100%; padding: 20px;
+      display: flex; justify-content: flex-end; z-index: 1000;
+    }
+    .menu-btn {
+      font-size: 24px; color: var(--ny-gold); cursor: pointer; transition: 0.3s;
+      background: rgba(255,255,255,0.05); width: 45px; height: 45px;
+      display: flex; align-items: center; justify-content: center; border-radius: 12px;
+    }
+
+    /* 📱 Side Menu Drawer */
+    .side-menu {
+      position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
+      background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px);
+      z-index: 1001; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 1px solid var(--border); padding: 60px 25px;
+    }
+    .side-menu.active { right: 0; }
+    .close-btn { position: absolute; top: 20px; left: 20px; font-size: 20px; cursor: pointer; color: #fff; }
+
+    .menu-title { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 20px; }
+    
+    .theme-option {
+      display: flex; align-items: center; gap: 15px; padding: 12px;
+      border-radius: 12px; cursor: pointer; transition: 0.3s; margin-bottom: 8px;
+      border: 1px solid transparent;
+    }
+    .theme-option:hover { background: rgba(255,255,255,0.05); border-color: var(--border); }
+    .color-dot { width: 15px; height: 15px; border-radius: 50%; }
+
+    /* Overlay */
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); z-index: 999; display: none;
+    }
+    .overlay.active { display: block; }
+
+    /* Main Content Styling */
     .decor { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
-    .blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; animation: float 10s infinite alternate; }
-    .b1 { background: var(--ny-gold); width: 300px; height: 300px; top: -50px; left: -50px; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; animation: float 10s infinite alternate; background: var(--ny-gold); }
+    .b1 { width: 300px; height: 300px; top: -50px; left: -50px; }
     .b2 { background: var(--ny-orange); width: 250px; height: 250px; bottom: -50px; right: -50px; }
     @keyframes float { to { transform: translate(40px, 50px) scale(1.1); } }
 
@@ -56,13 +90,13 @@
       background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
       border: 1px solid var(--border); border-radius: 35px; padding: 35px 20px;
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 215, 0, 0.1); 
-      text-align: center; position: relative;
+      text-align: center;
     }
 
-    .brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; }
+    /* 🏷️ Brand Name (No Space) */
+    .brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .brand span { color: var(--ny-gold); text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-    .brand i { color: #fff; font-size: 0.7em; margin-left: 5px; animation: rotate 3s infinite linear; }
-    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .brand i { font-size: 0.8em; color: #fff; }
 
     .sub { color: #aaa; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin: 8px 0 25px 0; font-weight: 600; }
 
@@ -74,9 +108,16 @@
 
     .box {
       background: rgba(0,0,0,0.6); border-radius: 18px; padding: 5px; border: 2px solid var(--border);
-      display: flex; align-items: center; gap: 5px; margin-bottom: 15px;
+      display: flex; align-items: center; gap: 5px; margin-bottom: 15px; position: relative;
     }
     .input { flex: 1; background: transparent; border: none; padding: 12px; color: #fff; font-size: 15px; width: 100%; }
+    
+    .paste-btn {
+      background: transparent; color: #888; border: none; font-size: 18px;
+      cursor: pointer; padding: 0 10px; transition: 0.3s; display: flex; align-items: center;
+    }
+    .paste-btn:hover { color: var(--ny-gold); transform: scale(1.1); }
+
     .get { background: var(--ny-gold); color: #000; border: none; padding: 0 22px; height: 48px; border-radius: 14px; font-weight: 800; cursor: pointer; flex-shrink: 0; }
 
     .preview { background: rgba(255,255,255,0.04); border-radius: 25px; padding: 15px; border: 1px solid var(--border); display: none; animation: slideUp 0.5s ease; margin-top: 10px; }
@@ -90,23 +131,15 @@
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .btn-dl { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: 0.3s; }
     .btn-dl:hover { background: var(--ny-gold); color: #000; }
-    .btn-dl.mp3 { background: linear-gradient(45deg, #f39c12, #e67e22); border: none; grid-column: span 2; }
+    .btn-dl.mp3 { background: linear-gradient(45deg, var(--ny-gold), var(--ny-orange)); border: none; grid-column: span 2; color:#000; }
 
-    /* 🔍 Fixed QR Area */
     .btn-qr { background: #fff; color: #000; grid-column: span 2; margin-top: 5px; border: none; font-weight: 800; }
-    #qrcode-container { 
-        margin-top: 20px; 
-        display: none; 
-        padding: 15px;
-        background: #fff; 
-        border-radius: 20px;
-        border: 4px solid var(--ny-gold);
-    }
+    #qrcode-container { margin-top: 20px; display: none; padding: 15px; background: #fff; border-radius: 20px; border: 4px solid var(--ny-gold); }
     #qrcode { padding: 10px; display: inline-block; }
     .btn-dl-qr { margin-top: 15px; background: #27ae60; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer; }
 
     .foot { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; font-size: 12px; color: #555; }
-    .senuz { color: #ffd700; font-weight: 700; }
+    .senuz { color: var(--ny-gold); font-weight: 700; }
 
     .music {
       position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%;
@@ -116,32 +149,58 @@
 
     @media (min-width: 500px) {
       .v-flex { flex-direction: row; text-align: left; }
-      .grid { grid-template-columns: repeat(2, 1fr); }
       .v-img { width: 130px; }
     }
   </style>
 </head>
-<body>
+<body class="theme-yellow">
+
+  <header class="nav-header">
+    <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+  </header>
+
+  <div class="overlay" onclick="toggleMenu()"></div>
+
+  <div class="side-menu" id="sideMenu">
+    <div class="close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
+    <p class="menu-title">Customize View</p>
+    
+    <div class="theme-option" onclick="setTheme('yellow')">
+        <div class="color-dot" style="background:#ffd700"></div> <span>Gold Theme</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('blue')">
+        <div class="color-dot" style="background:#3498db"></div> <span>Blue Theme</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('purple')">
+        <div class="color-dot" style="background:#a55eea"></div> <span>Purple Theme</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('red')">
+        <div class="color-dot" style="background:#ff4757"></div> <span>Red Theme</span>
+    </div>
+  </div>
 
   <div class="decor"><div class="blob b1"></div><div class="blob b2"></div></div>
   <div id="particles-box"></div>
 
   <div class="app">
     <div class="card">
-      <h1 class="brand">Senuz<span>Vid</span> <i class="fa-solid fa-fireworks"></i></h1>
+      <h1 class="brand"><i class="fa-brands fa-tiktok"></i>Senuz<span>Vid</span></h1>
       <p class="sub">Premium Tiktok Downloader</p>
 
       <div class="ny-badge">
-        <i class="fa-solid fa-champagne-glasses"></i>
-        <span>Happy New Year 2026! Enjoy Downloading!</span>
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Fast, Secure & Unlimited Downloads</span>
       </div>
 
       <div class="box">
         <input id="url" class="input" placeholder="Paste TikTok link here..." autocomplete="off">
+        <button class="paste-btn" id="pasteBtn" title="Paste from clipboard">
+            <i class="fa-regular fa-clipboard"></i>
+        </button>
         <button id="get" class="get">GET</button>
       </div>
 
-      <div id="loading" style="font-size:11px; color:#ffd700; margin-bottom:10px;"></div>
+      <div id="loading" style="font-size:11px; color:var(--ny-gold); margin-bottom:10px;"></div>
 
       <div id="preview" class="preview">
         <div class="v-flex">
@@ -174,6 +233,25 @@
   <audio id="player" loop><source src="https://files.catbox.moe/e502gt.mp3" type="audio/mpeg"></audio>
 
   <script>
+    document.getElementById('pasteBtn').addEventListener('click', async () => {
+        try {
+            const text = await navigator.clipboard.readText();
+            document.getElementById('url').value = text;
+        } catch (err) {
+            console.error('Failed to read clipboard contents: ', err);
+        }
+    });
+
+    function toggleMenu() {
+      document.getElementById('sideMenu').classList.toggle('active');
+      document.querySelector('.overlay').classList.toggle('active');
+    }
+
+    function setTheme(t) { 
+      document.body.className = 'theme-' + t; 
+      toggleMenu();
+    }
+
     function createSparkle() {
       const box = document.getElementById('particles-box');
       const sparkle = document.createElement('div');
@@ -192,9 +270,7 @@
     const API = "https://senuzvid-backend-5f903ce3cfc8.herokuapp.com";
     let currentUrl = "";
 
-    function isTikTok(url) {
-      return url.includes('tiktok.com') || url.includes('vm.tiktok');
-    }
+    function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
 
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
