@@ -93,7 +93,7 @@
       text-align: center;
     }
 
-    /* 🏷️ Brand Name (No Space) */
+    /*Brand Name ✅*/
     .brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .brand span { color: var(--ny-gold); text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
     .brand i { font-size: 0.8em; color: #fff; }
@@ -189,7 +189,7 @@
 
       <div class="ny-badge">
         <i class="fa-solid fa-circle-check"></i>
-        <span>Fast, Secure & Unlimited Downloads</span>
+        <span>Fast,Secure & Unlimited Downloads</span>
       </div>
 
       <div class="box">
@@ -230,7 +230,7 @@
   </div>
 
   <button id="musicToggle" class="music"><i class="fa-solid fa-music"></i></button>
-  <audio id="player" loop><source src="https://files.catbox.moe/f7g8a3.mp3" type="audio/mpeg"></audio>
+  <audio id="player" loop autoplay><source src="https://files.catbox.moe/f7g8a3.mp3" type="audio/mpeg"></audio>
 
   <script>
     document.getElementById('pasteBtn').addEventListener('click', async () => {
@@ -267,7 +267,7 @@
     }
     setInterval(createSparkle, 150);
 
-    const API = "https://senuzvid-backend-5f903ce3cfc8.herokuapp.com";
+    const API = "https://senuzvid-render-backend.onrender.com";
     let currentUrl = "";
 
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
@@ -290,7 +290,7 @@
         document.getElementById('title').innerText = data.title;
         document.getElementById('preview').style.display = 'block';
         load.innerText = "";
-      } catch(e) { load.innerText = "Error!"; }
+      } catch(e) { load.innerText = "Please wait to maintenance !😪"; }
       finally { btn.innerText = "GET"; }
     });
 
