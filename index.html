@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
 
-  <meta name="description" content="SenuzVid is a free online TikTok video downloader and MP3/MP4 converter." />
-  <title>SenuzVid – TikTok Video Downloader & MP3 Converter</title>
+  <meta name="description" content="SenuzVid is a free online Multi-Video downloader and MP3 converter." />
+  <title>SenuzVid – Multi-Video Downloader & MP3 Converter</title>
 
   <link rel="icon" href="https://files.catbox.moe/1dlcmm.jpg" type="image/png" />
   <link rel="apple-touch-icon" href="https://files.catbox.moe/lgzi2f.jpg" />
@@ -36,7 +36,6 @@
       overflow-x: hidden; position: relative; transition: 0.5s;
     }
 
-    /* ☰ Hamburger Menu Icon */
     .nav-header {
       position: fixed; top: 0; left: 0; width: 100%; padding: 20px;
       display: flex; justify-content: flex-end; z-index: 1000;
@@ -47,7 +46,6 @@
       display: flex; align-items: center; justify-content: center; border-radius: 12px;
     }
 
-    /* 📱 Side Menu Drawer */
     .side-menu {
       position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
       background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px);
@@ -67,14 +65,12 @@
     .theme-option:hover { background: rgba(255,255,255,0.05); border-color: var(--border); }
     .color-dot { width: 15px; height: 15px; border-radius: 50%; }
 
-    /* Overlay */
     .overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.6); z-index: 999; display: none;
     }
     .overlay.active { display: block; }
 
-    /* Main Content Styling */
     .decor { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
     .blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; animation: float 10s infinite alternate; background: var(--ny-gold); }
     .b1 { width: 300px; height: 300px; top: -50px; left: -50px; }
@@ -93,7 +89,6 @@
       text-align: center;
     }
 
-    /*Brand Name ✅*/
     .brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .brand span { color: var(--ny-gold); text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
     .brand i { font-size: 0.8em; color: #fff; }
@@ -163,7 +158,7 @@
 
   <div class="side-menu" id="sideMenu">
     <div class="close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
-    <p class="menu-title">Custamize<br>your Theme 🎨</p>
+    <p class="menu-title">Customize<br>your Theme 🎨</p>
     
     <div class="theme-option" onclick="setTheme('yellow')">
         <div class="color-dot" style="background:#ffd700"></div> <span>Gold Theme</span>
@@ -184,16 +179,16 @@
 
   <div class="app">
     <div class="card">
-      <h1 class="brand"><i class="fa-brands fa-tiktok"></i>SenuzVid</h1>
-      <p class="sub">Premium Tiktok Downloader</p>
+      <h1 class="brand"><i class="fa-solid fa-cloud-arrow-down"></i>SenuzVid</h1>
+      <p class="sub">All-in-One Video Downloader</p>
 
       <div class="ny-badge">
         <i class="fa-solid fa-circle-check"></i>
-        <span>Fast,Secure & Unlimited Downloads</span>
+        <span>Supports TikTok, FB, YT & more</span>
       </div>
 
       <div class="box">
-        <input id="url" class="input" placeholder="Paste TikTok link here..." autocomplete="off">
+        <input id="url" class="input" placeholder="Paste link here (TikTok, FB, YT)..." autocomplete="off">
         <button class="paste-btn" id="pasteBtn" title="Paste from clipboard">
             <i class="fa-regular fa-clipboard"></i>
         </button>
@@ -208,10 +203,10 @@
           <div class="v-info">
             <p id="title" class="v-title"></p>
             <div class="grid">
-              <button class="btn-dl" onclick="dl('1080p')">1080p FHD</button>
-              <button class="btn-dl" onclick="dl('720p')">720p HD</button>
-              <button class="btn-dl" onclick="dl('480p')">480p</button>
-              <button class="btn-dl" onclick="dl('360p')">360p</button>
+              <button class="btn-dl" onclick="dl('1080')">1080p FHD</button>
+              <button class="btn-dl" onclick="dl('720')">720p HD</button>
+              <button class="btn-dl" onclick="dl('480')">480p</button>
+              <button class="btn-dl" onclick="dl('360')">360p</button>
               <button class="btn-dl mp3" onclick="dl('audio')">DOWNLOAD MP3</button>
               <button class="btn-dl btn-qr" onclick="genQR()"><i class="fa-solid fa-qrcode"></i> GENERATE SCAN QR</button>
             </div>
@@ -233,12 +228,13 @@
   <audio id="player" loop autoplay><source src="https://files.catbox.moe/f7g8a3.mp3" type="audio/mpeg"></audio>
 
   <script>
+    // පේස්ට් බොත්තම වැඩ කරවීමට
     document.getElementById('pasteBtn').addEventListener('click', async () => {
         try {
             const text = await navigator.clipboard.readText();
             document.getElementById('url').value = text;
         } catch (err) {
-            console.error('Failed to read clipboard contents: ', err);
+            console.error('Failed to read clipboard: ', err);
         }
     });
 
@@ -267,40 +263,60 @@
     }
     setInterval(createSparkle, 150);
 
+    // මෙතනට ඔයාගේ Render Backend URL එක දෙන්න
     const API = "https://senuzvid-render-backend.onrender.com";
     let currentUrl = "";
 
-    function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
+    // මාරු කරපු isValidUrl Function එක
+    function isValidUrl(url) { 
+      return url.includes('tiktok.com') || 
+             url.includes('vm.tiktok') || 
+             url.includes('facebook.com') || 
+             url.includes('fb.watch') || 
+             url.includes('youtube.com') || 
+             url.includes('youtu.be') ||
+             url.includes('instagram.com');
+    }
 
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
-      if(!val || !isTikTok(val)) return alert("Invaild Tiktok Link !");
+      
+      // දැන් ඕනෑම ලින්ක් එකක් පරීක්ෂා කරයි
+      if(!val || !isValidUrl(val)) return alert("Invalid Link! Please use TikTok, FB, YT or Instagram.");
       
       currentUrl = val;
       const btn = document.getElementById('get');
       const load = document.getElementById('loading');
+      const preview = document.getElementById('preview');
+      
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-      load.innerText = "Processing...";
+      load.innerText = "Connecting to Engine...";
       document.getElementById('qrcode-container').style.display = 'none';
+      preview.style.display = 'none';
 
       try {
         const res = await fetch(`${API}/api/details?url=${encodeURIComponent(val)}`);
+        if (!res.ok) throw new Error("Server error");
+        
         const data = await res.json();
-        document.getElementById('thumb').src = data.thumbnail;
-        document.getElementById('title').innerText = data.title;
-        document.getElementById('preview').style.display = 'block';
+        document.getElementById('thumb').src = data.thumbnail || "https://files.catbox.moe/1dlcmm.jpg";
+        document.getElementById('title').innerText = data.title || "Ready to Download";
+        preview.style.display = 'block';
         load.innerText = "";
-      } catch(e) { load.innerText = "Please wait to maintenance !😪"; }
+      } catch(e) { 
+        load.innerText = "Error: සර්වර් එක සමඟ සම්බන්ධ විය නොහැක. පසුව උත්සාහ කරන්න."; 
+      }
       finally { btn.innerText = "GET"; }
     });
 
     function dl(q) {
       if(!currentUrl) return;
+      // Download API එකට ලින්ක් එක යැවීම
       window.open(`${API}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
     }
 
     function genQR() {
-      if(!currentUrl || !isTikTok(currentUrl)) return alert("Invalid TikTok Link!");
+      if(!currentUrl) return alert("Please get video details first!");
       const qrCont = document.getElementById('qrcode-container');
       const qrDiv = document.getElementById('qrcode');
       qrDiv.innerHTML = "";
