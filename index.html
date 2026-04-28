@@ -3,70 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
-  <meta name="description" content="SenuzVid is a free online Multi-Video downloader and MP3 converter." />
-  <title>SenuzVid – Multi-Video Downloader & MP3 Converter</title>
+  <title>SenuzVid – Multi-Video Downloader</title>
 
   <link rel="icon" href="https://files.catbox.moe/1dlcmm.jpg" type="image/png" />
-  <link rel="apple-touch-icon" href="https://files.catbox.moe/lgzi2f.jpg" />
-
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <style>
-    :root {
-      --ny-gold: #ffd700;
-      --ny-orange: #f39c12;
-      --bg-dark: #050505;
-      --glass: rgba(15, 15, 25, 0.9);
-      --border: rgba(255, 215, 0, 0.2);
-    }
-
+    :root { --ny-gold: #ffd700; --ny-orange: #f39c12; --bg-dark: #050505; --glass: rgba(15, 15, 25, 0.9); --border: rgba(255, 215, 0, 0.2); }
     .theme-red { --ny-gold: #ff4757; --ny-orange: #ff6b81; --border: rgba(255, 71, 87, 0.2); }
-    .theme-purple { --ny-gold: #a55eea; --ny-orange: #8854d0; --border: rgba(165, 94, 234, 0.2); }
     .theme-blue { --ny-gold: #3498db; --ny-orange: #2980b9; --border: rgba(52, 152, 219, 0.2); }
-    .theme-yellow { --ny-gold: #ffd700; --ny-orange: #f39c12; --border: rgba(255, 215, 0, 0.2); }
-
-    * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-
-    body {
-      margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: #fff;
-      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 10px;
-      overflow-x: hidden; position: relative; transition: 0.5s;
-    }
-
+    
+    * { box-sizing: border-box; outline: none; margin: 0; padding: 0; }
+    body { margin: 0; font-family: 'Outfit', sans-serif; background-color: var(--bg-dark); color: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px 10px; overflow-x: hidden; position: relative; }
+    
     .nav-header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px; display: flex; justify-content: flex-end; z-index: 1000; }
-    .menu-btn { font-size: 24px; color: var(--ny-gold); cursor: pointer; transition: 0.3s; background: rgba(255,255,255,0.05); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
-
-    .side-menu { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); z-index: 1001; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--border); padding: 60px 25px; }
+    .menu-btn { font-size: 24px; color: var(--ny-gold); cursor: pointer; background: rgba(255,255,255,0.05); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+    
+    .side-menu { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); z-index: 1001; transition: 0.5s; border-left: 1px solid var(--border); padding: 60px 25px; }
     .side-menu.active { right: 0; }
     .close-btn { position: absolute; top: 20px; left: 20px; font-size: 20px; cursor: pointer; color: #fff; }
 
-    .theme-option { display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 12px; cursor: pointer; transition: 0.3s; margin-bottom: 8px; border: 1px solid transparent; }
-    .theme-option:hover { background: rgba(255,255,255,0.05); border-color: var(--border); }
-    .color-dot { width: 15px; height: 15px; border-radius: 50%; }
-
-    .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; display: none; }
-    .overlay.active { display: block; }
-
-    .decor { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
-    .blob { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15; animation: float 10s infinite alternate; background: var(--ny-gold); }
-    .b1 { width: 300px; height: 300px; top: -50px; left: -50px; }
-    .b2 { background: var(--ny-orange); width: 250px; height: 250px; bottom: -50px; right: -50px; }
-    @keyframes float { to { transform: translate(40px, 50px) scale(1.1); } }
-
-    #particles-box { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
-    .sparkle { position: absolute; background: var(--ny-gold); border-radius: 50%; opacity: 0.8; animation: glow linear forwards; }
-    @keyframes glow { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(1.5) translateY(50px); opacity: 0; } }
-
     .app { width: 100%; max-width: 600px; z-index: 10; margin: auto; }
-    .card { background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 35px; padding: 35px 20px; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9); text-align: center; }
+    .card { background: var(--glass); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 35px; padding: 35px 20px; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9); text-align: center; }
 
-    .brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; color: #fff; }
+    .brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; }
     .brand span { color: var(--ny-gold); }
     .sub { color: #aaa; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; margin: 8px 0 25px 0; }
-
-    .ny-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 215, 0, 0.1); padding: 10px 20px; border-radius: 50px; border: 1px solid var(--border); margin-bottom: 25px; color: var(--ny-gold); font-size: 12px; }
 
     .box { background: rgba(0,0,0,0.6); border-radius: 18px; padding: 5px; border: 2px solid var(--border); display: flex; align-items: center; margin-bottom: 15px; }
     .input { flex: 1; background: transparent; border: none; padding: 12px; color: #fff; font-size: 15px; }
@@ -75,47 +39,34 @@
     .preview { background: rgba(255,255,255,0.04); border-radius: 25px; padding: 15px; border: 1px solid var(--border); display: none; margin-top: 10px; }
     .v-flex { display: flex; flex-direction: column; gap: 15px; align-items: center; }
     .v-img { width: 130px; aspect-ratio: 16/9; border-radius: 12px; object-fit: cover; border: 1.5px solid var(--ny-gold); }
-    .v-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 10px; }
-
+    
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
-    .btn-dl { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 12px; font-size: 11px; cursor: pointer; transition: 0.3s; }
+    .btn-dl { background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 12px; font-size: 11px; cursor: pointer; }
     .btn-dl:hover { background: var(--ny-gold); color: #000; }
-    .btn-dl.mp3 { background: linear-gradient(45deg, var(--ny-gold), var(--ny-orange)); border: none; grid-column: span 2; color:#000; font-weight: 800; }
+    .btn-dl.mp3 { background: linear-gradient(45deg, var(--ny-gold), var(--ny-orange)); grid-column: span 2; color:#000; font-weight: 800; }
+    .btn-qr { background: #fff; color: #000; grid-column: span 2; font-weight: 800; margin-top: 5px; }
 
-    .foot { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; font-size: 12px; color: #555; }
-    .senuz { color: var(--ny-gold); font-weight: 700; }
+    #qrcode-container { margin-top: 20px; display: none; padding: 15px; background: #fff; border-radius: 20px; }
+    .btn-dl-qr { margin-top: 15px; background: #27ae60; color: #fff; border: none; width: 100%; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer; }
+
     .music { position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%; background: var(--ny-gold); color: #000; display: flex; justify-content: center; align-items: center; cursor: pointer; border: none; }
-
     @media (min-width: 500px) { .v-flex { flex-direction: row; text-align: left; } }
   </style>
 </head>
 <body class="theme-yellow">
 
-  <header class="nav-header">
-    <div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
-  </header>
-
-  <div class="overlay" onclick="toggleMenu()"></div>
+  <header class="nav-header"><div class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div></header>
   <div class="side-menu" id="sideMenu">
     <div class="close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
-    <p style="color:#666; font-size:12px; margin-bottom:20px;">THEMES</p>
-    <div class="theme-option" onclick="setTheme('yellow')"><div class="color-dot" style="background:#ffd700"></div> Gold</div>
-    <div class="theme-option" onclick="setTheme('blue')"><div class="color-dot" style="background:#3498db"></div> Blue</div>
-    <div class="theme-option" onclick="setTheme('purple')"><div class="color-dot" style="background:#a55eea"></div> Purple</div>
-    <div class="theme-option" onclick="setTheme('red')"><div class="color-dot" style="background:#ff4757"></div> Red</div>
+    <div class="theme-option" onclick="setTheme('yellow')">Gold</div>
+    <div class="theme-option" onclick="setTheme('blue')">Blue</div>
+    <div class="theme-option" onclick="setTheme('red')">Red</div>
   </div>
-
-  <div class="decor"><div class="blob b1"></div><div class="blob b2"></div></div>
-  <div id="particles-box"></div>
 
   <div class="app">
     <div class="card">
-      <h1 class="brand"><i class="fa-solid fa-cloud-arrow-down"></i> Senuz<span>Vid</span></h1>
-      <p class="sub">Multi-Video Downloader</p>
-
-      <div class="ny-badge">
-        <i class="fa-solid fa-circle-check"></i> <span>TikTok, FB, YT & Instagram</span>
-      </div>
+      <h1 class="brand">Senuz<span>Vid</span></h1>
+      <p class="sub">All-in-One Downloader</p>
 
       <div class="box">
         <input id="url" class="input" placeholder="Paste link here..." autocomplete="off">
@@ -127,18 +78,24 @@
       <div id="preview" class="preview">
         <div class="v-flex">
           <img id="thumb" class="v-img" src="https://files.catbox.moe/1dlcmm.jpg">
-          <div class="v-info">
-            <p id="title" class="v-title">Video Ready</p>
+          <div style="flex:1; width:100%;">
+            <p id="title" class="v-title" style="font-size:13px; margin-bottom:10px; font-weight:700;"></p>
             <div class="grid">
+              <button class="btn-dl" onclick="dl('1080')">1080p FHD</button>
               <button class="btn-dl" onclick="dl('720')">720p HD</button>
               <button class="btn-dl" onclick="dl('480')">480p</button>
+              <button class="btn-dl" onclick="dl('360')">360p</button>
               <button class="btn-dl mp3" onclick="dl('audio')">DOWNLOAD MP3</button>
+              <button class="btn-dl btn-qr" onclick="genQR()"><i class="fa-solid fa-qrcode"></i> GENERATE SCAN QR</button>
             </div>
           </div>
         </div>
+        <div id="qrcode-container">
+          <center><div id="qrcode"></div></center>
+          <button class="btn-dl-qr" onclick="downloadQR()"><i class="fa-solid fa-download"></i> DOWNLOAD QR IMAGE</button>
+        </div>
       </div>
-
-      <div class="foot">ᴘᴏᴡᴇʀᴅ ʙʏ┋<span class="senuz">© ꜱᴇɴᴜᴢ ⑉〆</span></div>
+      <div style="margin-top:20px; font-size:12px; color:#555;">ᴘᴏᴡᴇʀᴅ ʙʏ┋<span style="color:var(--ny-gold);">© ꜱᴇɴᴜᴢ ⑉〆</span></div>
     </div>
   </div>
 
@@ -146,48 +103,55 @@
   <audio id="player" loop><source src="https://files.catbox.moe/f7g8a3.mp3" type="audio/mpeg"></audio>
 
   <script>
-    // --- මෙතනට ඔයාගේ අලුත් Singapore Render URL එක දාන්න ---
-    const API = "https://senuzvid-render-backend.onrender.com";
+    // --- මෙතනට ඔයාගේ Singapore URL එක දාන්න ---
+    const API = "https://senuzvid-render-backend.onrender.com"; 
     let currentUrl = "";
 
-    function toggleMenu() {
-      document.getElementById('sideMenu').classList.toggle('active');
-      document.querySelector('.overlay').classList.toggle('active');
-    }
-
+    function toggleMenu() { document.getElementById('sideMenu').classList.toggle('active'); }
     function setTheme(t) { document.body.className = 'theme-' + t; toggleMenu(); }
 
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
-      if(!val) return alert("කරුණාකර ලින්ක් එකක් ඇතුළත් කරන්න!");
-      
+      if(!val) return alert("ලින්ක් එක පේස්ට් කරන්න!");
       currentUrl = val;
       const btn = document.getElementById('get');
       const load = document.getElementById('loading');
       const preview = document.getElementById('preview');
       
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-      load.innerText = "සම්බන්ධ වෙමින් පවතී...";
+      load.innerText = "සම්බන්ධ වෙමින්...";
       preview.style.display = 'none';
 
       try {
-        // Details ලබා ගැනීම
         const res = await fetch(`${API}/api/details?url=${encodeURIComponent(val)}`);
         const data = await res.json();
-        
         document.getElementById('thumb').src = data.thumbnail || "https://files.catbox.moe/1dlcmm.jpg";
-        document.getElementById('title').innerText = data.title || "Video Found";
+        document.getElementById('title').innerText = data.title || "Video Ready";
         preview.style.display = 'block';
         load.innerText = "";
-      } catch(e) { 
-        load.innerText = "Error: සර්වර් එක සමඟ සම්බන්ධ විය නොහැක. URL එක පරීක්ෂා කරන්න."; 
-      } finally { btn.innerText = "GET"; }
+      } catch(e) { load.innerText = "Error: සර්වර් එක සම්බන්ධ නැත."; }
+      finally { btn.innerText = "GET"; }
     });
 
     function dl(q) {
       if(!currentUrl) return;
-      // Download API එකට Redirect කිරීම
       window.open(`${API}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
+    }
+
+    function genQR() {
+      const qrDiv = document.getElementById('qrcode');
+      qrDiv.innerHTML = "";
+      document.getElementById('qrcode-container').style.display = 'block';
+      new QRCode(qrDiv, { text: currentUrl, width: 180, height: 180 });
+    }
+
+    function downloadQR() {
+      const canvas = document.querySelector("#qrcode canvas");
+      if (!canvas) return;
+      const link = document.createElement("a");
+      link.download = "SenuzVid-QR.png";
+      link.href = canvas.toDataURL();
+      link.click();
     }
 
     const audio = document.getElementById('player');
