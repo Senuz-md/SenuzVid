@@ -97,7 +97,7 @@
       text-align: center;
     }
 
-    /* Ad Banner Container Styling */
+    /* Ad Container Fix: Prevent Big Vertical Ads */
     .ad-wrapper {
       margin: 15px auto;
       display: flex;
@@ -105,6 +105,15 @@
       align-items: center;
       overflow: hidden;
       border-radius: 16px;
+      max-width: 100%;
+      max-height: 100px;
+    }
+
+    .ad-wrapper iframe, 
+    .ad-wrapper img {
+      max-width: 100% !important;
+      height: auto !important;
+      max-height: 100px !important;
     }
 
     .brand { font-size: clamp(30px, 9vw, 45px); font-weight: 800; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; }
@@ -196,7 +205,7 @@
   <div id="particles-box"></div>
 
   <div class="app">
-    <!-- Top Native Ad placement -->
+    <!-- Top Native Banner Placement -->
     <div class="ad-wrapper">
       <div id="container-50399542f1b4c8e264c1291e8c175905"></div>
     </div>
@@ -217,20 +226,6 @@
         </button>
         
         <button id="get" class="get">GET</button>
-      </div>
-
-      <!-- Mid Inline Ad Placement -->
-      <div class="ad-wrapper">
-        <script>
-          atOptions = {
-            'key' : '665ff7f5d3dbb5cfd7313e94557a3c55',
-            'format' : 'iframe',
-            'height' : 1,
-            'width' : 1,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highrevenueformat.com/665ff7f5d3dbb5cfd7313e94557a3c55/invoke.js"></script>
       </div>
 
       <div id="loading" style="font-size:11px; color:var(--ny-gold); margin-bottom:10px;"></div>
@@ -256,20 +251,6 @@
           <center><div id="qrcode"></div></center>
           <button class="btn-dl-qr" onclick="downloadQR()"><i class="fa-solid fa-download"></i> DOWNLOAD QR IMAGE</button>
         </div>
-      </div>
-
-      <!-- Bottom Ad placement -->
-      <div class="ad-wrapper">
-        <script>
-          atOptions = {
-            'key' : '7802b01e8cc68b19ac2add1f70c50f11',
-            'format' : 'iframe',
-            'height' : 1,
-            'width' : 1,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highrevenueformat.com/7802b01e8cc68b19ac2add1f70c50f11/invoke.js"></script>
       </div>
 
       <div class="foot">ᴘᴏᴡᴇʀᴅ ʙʏ┋<span class="senuz">© ꜱᴇɴᴜᴢ ⑉〆</span></div>
