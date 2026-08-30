@@ -568,9 +568,7 @@
     }
     drawParticles();
 
-    // Direct Backend 😌
-    const API = "";
-
+    // Direct Netlify Reverse Proxy
     let currentUrl = "";
 
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
@@ -591,10 +589,15 @@
       skeleton.style.display = 'block';
       document.getElementById('qrcode-container').style.display = 'none';
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout check
+
       try {
-        const res = await fetch(`${API}/api/details?url=${encodeURIComponent(val)}`);
+        const fetchUrl = `/api/details?url=${encodeURIComponent(val)}`;
+        const res = await fetch(fetchUrl, { signal: controller.signal });
+        clearTimeout(timeoutId);
         
-        if (!res.ok) throw new Error("Connection failed!");
+        if (!res.ok) throw new Error("Server response error!");
 
         const data = await res.json();
         document.getElementById('thumb').src = data.thumbnail;
@@ -606,8 +609,13 @@
       } catch(e) { 
         console.error("Full Error:", e);
         skeleton.style.display = 'none';
-        load.innerText = "Error: " + e.message; 
-        showToast("Failed to fetch video details", "fa-circle-xmark");
+        if (e.name === 'AbortError') {
+          load.innerText = "Error: Server Timed Out (Slow Backend)";
+          showToast("Server timed out! Check Backend.", "fa-clock");
+        } else {
+          load.innerText = "Error: Connection Failed"; 
+          showToast("Failed to fetch video details", "fa-circle-xmark");
+        }
       } finally { 
         btn.innerText = "GET"; 
       }
@@ -615,7 +623,7 @@
 
     function dl(q) {
       if(!currentUrl) return;
-      window.open(`${API}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
+      window.open(`/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
       showToast(`Starting ${q} Download...`, "fa-download");
     }
 
@@ -677,8 +685,6 @@
         mBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; 
       }
     });
-    console.log("Runing on Senuz innovation © 2026 🚨");
-    console.log("ᴘᴏᴡᴇʀᴇᴅ ʙʏ┋© ꜱᴇɴᴜᴢ ⑉〆");
   </script>
 </body>
 </html>
