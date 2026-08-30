@@ -568,9 +568,9 @@
     }
     drawParticles();
 
-    // Auto CORS Bypass Proxy Connection
-    const BASE_BACKEND = "http://kod.publicvm.com:2035";
-    const API = "https://api.allorigins.win/raw?url=" + encodeURIComponent(BASE_BACKEND);
+    // Direct Backend 😌
+    const API = "";
+
     let currentUrl = "";
 
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
@@ -592,8 +592,7 @@
       document.getElementById('qrcode-container').style.display = 'none';
 
       try {
-        const fetchUrl = `${API}/api/details?url=${encodeURIComponent(val)}`;
-        const res = await fetch(fetchUrl);
+        const res = await fetch(`${API}/api/details?url=${encodeURIComponent(val)}`);
         
         if (!res.ok) throw new Error("Connection failed!");
 
@@ -616,7 +615,7 @@
 
     function dl(q) {
       if(!currentUrl) return;
-      window.open(`${BASE_BACKEND}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
+      window.open(`${API}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
       showToast(`Starting ${q} Download...`, "fa-download");
     }
 
@@ -678,6 +677,8 @@
         mBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; 
       }
     });
+    console.log("Runing on Senuz innovation © 2026 🚨");
+    console.log("ᴘᴏᴡᴇʀᴇᴅ ʙʏ┋© ꜱᴇɴᴜᴢ ⑉〆");
   </script>
 </body>
 </html>
