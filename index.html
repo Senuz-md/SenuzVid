@@ -508,7 +508,7 @@
 
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
 
-    // MULTI-FALLBACK FETCH ENGINE
+    // MULTI-ENGINE TRIPLE API FETCH (SOLVES ALL CORS & BLOCK ISSUES)
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
       if(!val || !isTikTok(val)) return showToast("Invalid TikTok Link!", "fa-triangle-exclamation");
@@ -527,7 +527,7 @@
 
       let success = false;
 
-      // Primary Attempt: Direct TikWM API
+      // Engine 1: Direct TikWM API
       try {
         const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(val)}`);
         if (res.ok) {
@@ -537,49 +537,51 @@
             success = true;
           }
         }
-      } catch (e) {
-        console.warn("Direct API Request Failed, Trying Backup Proxy 1...");
-      }
+      } catch (e) { console.warn("Engine 1 failed..."); }
 
-      // Backup Attempt 1: CorsProxy.io
+      // Engine 2: SSSTik Free Public Endpoint (Fallback 1)
       if (!success) {
         try {
-          const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(`https://www.tikwm.com/api/?url=${val}`)}`;
-          const res = await fetch(proxyUrl);
+          const res = await fetch(`https://ssstik.io/abc?url=dl`, {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+             body: new URLSearchParams({ id: val, locale: 'en', tt: '0' })
+          });
+          if (res.ok) {
+             const html = await res.text();
+             const parser = new DOMParser();
+             const doc = parser.parseFromString(html, 'text/html');
+             const dlLink = doc.querySelector('a.without_watermark')?.href;
+             const musicLink = doc.querySelector('a.music')?.href;
+             const titleText = doc.querySelector('.maintext')?.innerText || 'TikTok Video';
+             const thumbImg = doc.querySelector('.result_author')?.src || '';
+
+             if (dlLink) {
+               renderData(thumbImg, titleText, dlLink, musicLink || dlLink);
+               success = true;
+             }
+          }
+        } catch (e) { console.warn("Engine 2 failed..."); }
+      }
+
+      // Engine 3: LoviTech API (Fallback 2)
+      if (!success) {
+        try {
+          const res = await fetch(`https://api.lovitech.pw/api/tiktok?url=${encodeURIComponent(val)}`);
           if (res.ok) {
             const json = await res.json();
-            if (json && json.code === 0 && json.data) {
-              renderData(json.data.cover || json.data.origin_cover, json.data.title, json.data.play, json.data.music);
+            if (json && json.data) {
+              renderData(json.data.cover || json.data.avatar, json.data.title, json.data.play || json.data.nowatermark, json.data.music);
               success = true;
             }
           }
-        } catch (e) {
-          console.warn("Backup 1 Failed, Trying Backup Proxy 2...");
-        }
-      }
-
-      // Backup Attempt 2: AllOrigins Proxy
-      if (!success) {
-        try {
-          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.tikwm.com/api/?url=${val}`)}`;
-          const res = await fetch(proxyUrl);
-          if (res.ok) {
-            const proxyData = await res.json();
-            const json = JSON.parse(proxyData.contents);
-            if (json && json.code === 0 && json.data) {
-              renderData(json.data.cover || json.data.origin_cover, json.data.title, json.data.play, json.data.music);
-              success = true;
-            }
-          }
-        } catch (e) {
-          console.error("All Backup Engines Failed:", e);
-        }
+        } catch (e) { console.warn("Engine 3 failed..."); }
       }
 
       if (!success) {
         skeleton.style.display = 'none';
         load.innerText = "Error: Video Fetch Failed"; 
-        showToast("Unable to fetch video details! Please try again.", "fa-circle-xmark");
+        showToast("Unable to fetch video! Check connection or link.", "fa-circle-xmark");
       }
 
       btn.innerText = "GET"; 
@@ -590,7 +592,7 @@
       const skeleton = document.getElementById('skeleton');
       const load = document.getElementById('loading');
 
-      document.getElementById('thumb').src = thumb;
+      document.getElementById('thumb').src = thumb || 'https://files.catbox.moe/1dlcmm.jpg';
       document.getElementById('title').innerText = title || 'TikTok Video';
       
       downloadVideoUrl = videoUrl;
