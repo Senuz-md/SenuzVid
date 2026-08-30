@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<br> <br>
+  <br><br>
 
   <script src="https://pl31035622.profitableratecpmnetwork.com/38/41/f4/3841f4ecd02428cd263942bad4dee79a.js"></script>
   <script src="https://pl31035625.profitableratecpmnetwork.com/27/09/22/270922af5d0dfa224cf0ac0814c04b43.js"></script>
@@ -31,7 +31,6 @@
       --border: rgba(255, 215, 0, 0.25);
     }
 
-    /* Themes */
     .theme-yellow { --ny-gold: #ffd700; --ny-orange: #f39c12; --border: rgba(255, 215, 0, 0.3); }
     .theme-blue { --ny-gold: #3498db; --ny-orange: #2980b9; --border: rgba(52, 152, 219, 0.3); }
     .theme-purple { --ny-gold: #a55eea; --ny-orange: #8854d0; --border: rgba(165, 94, 234, 0.3); }
@@ -127,14 +126,8 @@
       animation: cardPulseGlow 3s infinite ease-in-out alternate;
     }
     @keyframes cardPulseGlow {
-      0% {
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 15px var(--border);
-        border-color: var(--border);
-      }
-      100% {
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px var(--ny-gold);
-        border-color: var(--ny-gold);
-      }
+      0% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 15px var(--border); border-color: var(--border); }
+      100% { box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px var(--ny-gold); border-color: var(--ny-gold); }
     }
     
     .info-card { margin-top: 120px; padding: 40px 20px; }
@@ -312,7 +305,6 @@
 <body class="theme-yellow">
 
   <canvas id="particles-canvas"></canvas>
-
   <div class="toast-container" id="toastContainer"></div>
 
   <header class="nav-header">
@@ -325,27 +317,13 @@
     <div class="close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
     <p class="menu-title">Theme customize section 🎨</p>
     
-    <div class="theme-option" onclick="setTheme('yellow')">
-        <div class="color-dot" style="background:#ffd700"></div> <span>Gold Theme</span>
-    </div>
-    <div class="theme-option" onclick="setTheme('blue')">
-        <div class="color-dot" style="background:#3498db"></div> <span>Blue Theme</span>
-    </div>
-    <div class="theme-option" onclick="setTheme('purple')">
-        <div class="color-dot" style="background:#a55eea"></div> <span>Purple Theme</span>
-    </div>
-    <div class="theme-option" onclick="setTheme('red')">
-        <div class="color-dot" style="background:#ff4757"></div> <span>Red Theme</span>
-    </div>
-    <div class="theme-option" onclick="setTheme('neon')">
-        <div class="color-dot" style="background:#00ff88"></div> <span>Cyberpunk Neon</span>
-    </div>
-    <div class="theme-option" onclick="setTheme('emerald')">
-        <div class="color-dot" style="background:#2ecc71"></div> <span>Emerald Green</span>
-    </div>
-    <div class="theme-option" onclick="setTheme('sunset')">
-        <div class="color-dot" style="background:#ff7675"></div> <span>Sunset Pink</span>
-    </div>
+    <div class="theme-option" onclick="setTheme('yellow')"><div class="color-dot" style="background:#ffd700"></div> <span>Gold Theme</span></div>
+    <div class="theme-option" onclick="setTheme('blue')"><div class="color-dot" style="background:#3498db"></div> <span>Blue Theme</span></div>
+    <div class="theme-option" onclick="setTheme('purple')"><div class="color-dot" style="background:#a55eea"></div> <span>Purple Theme</span></div>
+    <div class="theme-option" onclick="setTheme('red')"><div class="color-dot" style="background:#ff4757"></div> <span>Red Theme</span></div>
+    <div class="theme-option" onclick="setTheme('neon')"><div class="color-dot" style="background:#00ff88"></div> <span>Cyberpunk Neon</span></div>
+    <div class="theme-option" onclick="setTheme('emerald')"><div class="color-dot" style="background:#2ecc71"></div> <span>Emerald Green</span></div>
+    <div class="theme-option" onclick="setTheme('sunset')"><div class="color-dot" style="background:#ff7675"></div> <span>Sunset Pink</span></div>
   </div>
 
   <div class="app">
@@ -367,7 +345,6 @@
         <button class="paste-btn" id="pasteBtn" title="Paste from clipboard">
             <i class="fa-regular fa-clipboard"></i>
         </button>
-        
         <button id="get" class="get">GET</button>
       </div>
 
@@ -420,62 +397,31 @@
 
     <div class="card info-card">
       <div class="features-grid">
-        <div class="feature-card">
-          <i class="fa-solid fa-ban"></i>
-          <h4>No Watermark</h4>
-          <p>Clean & High Quality</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-bolt"></i>
-          <h4>Ultra Fast</h4>
-          <p>Instant Direct Download</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-music"></i>
-          <h4>MP3 Converter</h4>
-          <p>Extract TikTok Audio</p>
-        </div>
-        <div class="feature-card">
-          <i class="fa-solid fa-shield-halved"></i>
-          <h4>100% Free</h4>
-          <p>No Signup Needed</p>
-        </div>
+        <div class="feature-card"><i class="fa-solid fa-ban"></i><h4>No Watermark</h4><p>Clean & High Quality</p></div>
+        <div class="feature-card"><i class="fa-solid fa-bolt"></i><h4>Ultra Fast</h4><p>Instant Direct Download</p></div>
+        <div class="feature-card"><i class="fa-solid fa-music"></i><h4>MP3 Converter</h4><p>Extract TikTok Audio</p></div>
+        <div class="feature-card"><i class="fa-solid fa-shield-halved"></i><h4>100% Free</h4><p>No Signup Needed</p></div>
       </div>
 
       <div class="faq-section">
         <div class="faq-title"><i class="fa-solid fa-circle-question"></i> How To Download</div>
-        
         <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)">
-            <span>How to download TikTok videos without watermark?</span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <div class="faq-body">
-            Copy the TikTok video link, paste it into the box above, click GET, and select your preferred quality to download.
-          </div>
+          <div class="faq-header" onclick="toggleFaq(this)"><span>How to download TikTok videos without watermark?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-body">Copy the TikTok video link, paste it into the box above, click GET, and select your preferred quality to download.</div>
         </div>
-
         <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)">
-            <span>Can I convert TikTok videos to MP3?</span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <div class="faq-body">
-            Yes! Click the "DOWNLOAD MP3" button after fetching the video details to save high-quality audio.
-          </div>
+          <div class="faq-header" onclick="toggleFaq(this)"><span>Can I convert TikTok videos to MP3?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-body">Yes! Click the "DOWNLOAD MP3" button after fetching the video details to save high-quality audio.</div>
         </div>
       </div>
 
       <div class="foot">ᴘᴏᴡᴇʀᴅ ʙʏ┋<span class="senuz">© ꜱᴇɴᴜᴢ ⑉〆</span></div>
     </div>
-
   </div>
 
   <div class="music-container">
     <div class="eq-bars" id="eqBars">
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
-      <div class="eq-bar"></div>
+      <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
     </div>
     <button id="musicToggle" class="music"><i class="fa-solid fa-music"></i></button>
   </div>
@@ -483,6 +429,9 @@
   <audio id="player" loop autoplay><source src="https://files.catbox.moe/5leqyb.mp3" type="audio/mpeg"></audio>
 
   <script>
+    // BACKEND CONFIGURATION
+    const BACKEND_URL = "http://kod.publicvm.com:2035";
+
     function showToast(message, icon = "fa-circle-check") {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
@@ -531,9 +480,7 @@
     resizeCanvas();
 
     const particles = [];
-    const particleCount = 45;
-
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < 45; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -547,32 +494,23 @@
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const currentColor = getComputedStyle(document.body).getPropertyValue('--ny-gold').trim() || '#ffd700';
-
       particles.forEach(p => {
-        p.y -= p.speedY;
-        p.x += p.speedX;
-
-        if (p.y < 0) {
-          p.y = canvas.height;
-          p.x = Math.random() * canvas.width;
-        }
-
+        p.y -= p.speedY; p.x += p.speedX;
+        if (p.y < 0) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = currentColor;
         ctx.globalAlpha = p.alpha;
         ctx.fill();
       });
-
       requestAnimationFrame(drawParticles);
     }
     drawParticles();
 
-    // Direct Netlify Reverse Proxy
     let currentUrl = "";
-
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
 
+    // FETCH DETAILS VIA CORS PROXY
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
       if(!val || !isTikTok(val)) return showToast("Invalid TikTok Link!", "fa-triangle-exclamation");
@@ -589,17 +527,15 @@
       skeleton.style.display = 'block';
       document.getElementById('qrcode-container').style.display = 'none';
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout check
-
       try {
-        const fetchUrl = `/api/details?url=${encodeURIComponent(val)}`;
-        const res = await fetch(fetchUrl, { signal: controller.signal });
-        clearTimeout(timeoutId);
-        
-        if (!res.ok) throw new Error("Server response error!");
+        const targetApi = `${BACKEND_URL}/api/details?url=${encodeURIComponent(val)}`;
+        const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(targetApi);
+
+        const res = await fetch(proxyUrl);
+        if (!res.ok) throw new Error("API Error");
 
         const data = await res.json();
+
         document.getElementById('thumb').src = data.thumbnail;
         document.getElementById('title').innerText = data.title;
         skeleton.style.display = 'none';
@@ -607,23 +543,20 @@
         load.innerText = "";
         showToast("Video fetched successfully!");
       } catch(e) { 
-        console.error("Full Error:", e);
+        console.error("Fetch Error:", e);
         skeleton.style.display = 'none';
-        if (e.name === 'AbortError') {
-          load.innerText = "Error: Server Timed Out (Slow Backend)";
-          showToast("Server timed out! Check Backend.", "fa-clock");
-        } else {
-          load.innerText = "Error: Connection Failed"; 
-          showToast("Failed to fetch video details", "fa-circle-xmark");
-        }
+        load.innerText = "Error: Connection Failed"; 
+        showToast("Failed to fetch video details", "fa-circle-xmark");
       } finally { 
         btn.innerText = "GET"; 
       }
     });
 
+    // DOWNLOAD FUNCTION
     function dl(q) {
       if(!currentUrl) return;
-      window.open(`/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
+      const downloadTarget = `${BACKEND_URL}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`;
+      window.open(downloadTarget, '_blank');
       showToast(`Starting ${q} Download...`, "fa-download");
     }
 
@@ -666,24 +599,12 @@
     const audio = document.getElementById('player');
     const eqBars = document.getElementById('eqBars');
 
-    audio.onplay = () => {
-      eqBars.classList.add('active');
-      document.body.classList.add('playing-music');
-    };
-
-    audio.onpause = () => {
-      eqBars.classList.remove('active');
-      document.body.classList.remove('playing-music');
-    };
+    audio.onplay = () => { eqBars.classList.add('active'); document.body.classList.add('playing-music'); };
+    audio.onpause = () => { eqBars.classList.remove('active'); document.body.classList.remove('playing-music'); };
 
     mBtn.addEventListener('click', () => {
-      if(audio.paused) { 
-        audio.play(); 
-        mBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; 
-      } else { 
-        audio.pause(); 
-        mBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; 
-      }
+      if(audio.paused) { audio.play(); mBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; } 
+      else { audio.pause(); mBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; }
     });
   </script>
 </body>
