@@ -16,8 +16,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <br><br>
-
   <script src="https://pl31035622.profitableratecpmnetwork.com/38/41/f4/3841f4ecd02428cd263942bad4dee79a.js"></script>
   <script src="https://pl31035625.profitableratecpmnetwork.com/27/09/22/270922af5d0dfa224cf0ac0814c04b43.js"></script>
   <script async="async" data-cfasync="false" src="https://pl31035623.profitableratecpmnetwork.com/50399542f1b4c8e264c1291e8c175905/invoke.js"></script>
@@ -507,7 +505,7 @@
 
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
 
-    // 100% WORKING TIKTOK FETCH WITH CORS PROXY BYPASS
+    // FETCH WITH ALLORIGINS PROXY BYPASS
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
       if(!val || !isTikTok(val)) return showToast("Invalid TikTok Link!", "fa-triangle-exclamation");
@@ -526,10 +524,9 @@
 
       let dataFetched = false;
 
-      // ENGINE: Using CORS Proxy to bypass browser/Netlify block
       try {
         const targetApi = `https://www.tikwm.com/api/?url=${encodeURIComponent(val)}`;
-        const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(targetApi)}`);
+        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(targetApi)}`);
         if (res.ok) {
           const json = await res.json();
           if (json && json.code === 0 && json.data) {
