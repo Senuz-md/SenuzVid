@@ -372,11 +372,9 @@
           <div class="v-info">
             <p id="title" class="v-title"></p>
             <div class="grid">
-              <button class="btn-dl" onclick="dl('1080p')">1080p FHD</button>
-              <button class="btn-dl" onclick="dl('720p')">720p HD</button>
-              <button class="btn-dl" onclick="dl('480p')">480p</button>
-              <button class="btn-dl" onclick="dl('360p')">360p</button>
-              <button class="btn-dl mp3" onclick="dl('audio')">DOWNLOAD MP3</button>
+              <button class="btn-dl" onclick="dl('video')">DOWNLOAD HD VIDEO</button>
+              <button class="btn-dl" onclick="dl('video')">NO WATERMARK</button>
+              <button class="btn-dl mp3" onclick="dl('audio')">DOWNLOAD MP3 AUDIO</button>
               <button class="btn-dl btn-qr" onclick="genQR()"><i class="fa-solid fa-qrcode"></i> GENERATE SCAN QR</button>
             </div>
           </div>
@@ -411,7 +409,7 @@
         </div>
         <div class="faq-item">
           <div class="faq-header" onclick="toggleFaq(this)"><span>Can I convert TikTok videos to MP3?</span><i class="fa-solid fa-chevron-down"></i></div>
-          <div class="faq-body">Yes! Click the "DOWNLOAD MP3" button after fetching the video details to save high-quality audio.</div>
+          <div class="faq-body">Yes! Click the "DOWNLOAD MP3 AUDIO" button after fetching the video details to save high-quality audio.</div>
         </div>
       </div>
 
@@ -429,9 +427,6 @@
   <audio id="player" loop autoplay><source src="https://files.catbox.moe/5leqyb.mp3" type="audio/mpeg"></audio>
 
   <script>
-    // BACKEND CONFIGURATION
-    const BACKEND_URL = "http://kod.publicvm.com:2035";
-
     function showToast(message, icon = "fa-circle-check") {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
@@ -508,9 +503,12 @@
     drawParticles();
 
     let currentUrl = "";
+    let downloadVideoUrl = "";
+    let downloadAudioUrl = "";
+
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
 
-    // FETCH DETAILS VIA CORS PROXY
+    // DIRECT TIKWM API FETCH (NO BACKEND NEEDED)
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
       if(!val || !isTikTok(val)) return showToast("Invalid TikTok Link!", "fa-triangle-exclamation");
@@ -528,36 +526,46 @@
       document.getElementById('qrcode-container').style.display = 'none';
 
       try {
-        const targetApi = `${BACKEND_URL}/api/details?url=${encodeURIComponent(val)}`;
-        const proxyUrl = `https://corsproxy.io/?` + encodeURIComponent(targetApi);
+        const res = await fetch(`https://www.tikwm.com/api/?url=${encodeURIComponent(val)}`);
+        if (!res.ok) throw new Error("API Connection Error");
 
-        const res = await fetch(proxyUrl);
-        if (!res.ok) throw new Error("API Error");
+        const json = await res.json();
 
-        const data = await res.json();
+        if (json && json.code === 0 && json.data) {
+          document.getElementById('thumb').src = json.data.cover || json.data.origin_cover;
+          document.getElementById('title').innerText = json.data.title || 'TikTok Video';
+          
+          downloadVideoUrl = json.data.play;
+          downloadAudioUrl = json.data.music;
 
-        document.getElementById('thumb').src = data.thumbnail;
-        document.getElementById('title').innerText = data.title;
-        skeleton.style.display = 'none';
-        preview.style.display = 'block';
-        load.innerText = "";
-        showToast("Video fetched successfully!");
+          skeleton.style.display = 'none';
+          preview.style.display = 'block';
+          load.innerText = "";
+          showToast("Video fetched successfully!");
+        } else {
+          throw new Error("Video not found or private link");
+        }
       } catch(e) { 
         console.error("Fetch Error:", e);
         skeleton.style.display = 'none';
-        load.innerText = "Error: Connection Failed"; 
-        showToast("Backend Server Offline or Port Blocked!", "fa-circle-xmark");
+        load.innerText = "Error: Video Fetch Failed"; 
+        showToast("Unable to fetch video details!", "fa-circle-xmark");
       } finally { 
         btn.innerText = "GET"; 
       }
     });
 
-    // DOWNLOAD FUNCTION
-    function dl(q) {
-      if(!currentUrl) return;
-      const downloadTarget = `${BACKEND_URL}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`;
-      window.open(downloadTarget, '_blank');
-      showToast(`Starting ${q} Download...`, "fa-download");
+    // DIRECT DOWNLOAD FUNCTION
+    function dl(type) {
+      if (type === 'audio' && downloadAudioUrl) {
+        window.open(downloadAudioUrl, '_blank');
+        showToast("Downloading Audio MP3...", "fa-download");
+      } else if (downloadVideoUrl) {
+        window.open(downloadVideoUrl, '_blank');
+        showToast("Downloading HD Video...", "fa-download");
+      } else {
+        showToast("Download URL unavailable!", "fa-triangle-exclamation");
+      }
     }
 
     function genQR() {
