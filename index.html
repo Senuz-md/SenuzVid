@@ -546,7 +546,7 @@
         console.error("Fetch Error:", e);
         skeleton.style.display = 'none';
         load.innerText = "Error: Connection Failed"; 
-        showToast("Failed to fetch video details", "fa-circle-xmark");
+        showToast("Backend Server Offline or Port Blocked!", "fa-circle-xmark");
       } finally { 
         btn.innerText = "GET"; 
       }
