@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/*"
+  to = "http://kod.publicvm.com:2035/api/:splat"
+  status = 200
+  force = true
