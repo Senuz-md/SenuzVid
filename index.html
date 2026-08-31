@@ -16,8 +16,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<br> <br>
-
   <script src="https://pl31035622.profitableratecpmnetwork.com/38/41/f4/3841f4ecd02428cd263942bad4dee79a.js"></script>
   <script src="https://pl31035625.profitableratecpmnetwork.com/27/09/22/270922af5d0dfa224cf0ac0814c04b43.js"></script>
   <script async="async" data-cfasync="false" src="https://pl31035623.profitableratecpmnetwork.com/50399542f1b4c8e264c1291e8c175905/invoke.js"></script>
@@ -219,7 +217,7 @@
     .btn-dl {
       background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px;
       border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background 0.2s ease;
-      text-decoration: none; display: flex; align-items: center; justify-content: center; text-align: center;
+      text-decoration: none; display: flex; align-items: center; justify-content: center; text-align: center; gap: 6px;
     }
     .btn-dl:hover { background: var(--ny-gold); color: #000; }
 
@@ -373,9 +371,10 @@
           <div class="v-info">
             <p id="title" class="v-title"></p>
             <div class="grid">
-              <a id="btn-hd" class="btn-dl" target="_blank" download>DOWNLOAD HD VIDEO</a>
-              <a id="btn-nowm" class="btn-dl" target="_blank" download>NO WATERMARK</a>
-              <a id="btn-mp3" class="btn-dl mp3" target="_blank" download>DOWNLOAD MP3 AUDIO</a>
+              <a id="btn-1080p" class="btn-dl" target="_blank" download><i class="fa-solid fa-video"></i> 1080P HD</a>
+              <a id="btn-720p" class="btn-dl" target="_blank" download><i class="fa-solid fa-film"></i> 720P SD</a>
+              <a id="btn-360p" class="btn-dl" target="_blank" download><i class="fa-solid fa-compress"></i> 360P Lite</a>
+              <a id="btn-mp3" class="btn-dl mp3" target="_blank" download><i class="fa-solid fa-music"></i> DOWNLOAD MP3 AUDIO</a>
               <button class="btn-dl btn-qr" onclick="genQR()"><i class="fa-solid fa-qrcode"></i> GENERATE SCAN QR</button>
             </div>
           </div>
@@ -405,8 +404,8 @@
       <div class="faq-section">
         <div class="faq-title"><i class="fa-solid fa-circle-question"></i> How To Download</div>
         <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)"><span>How to download TikTok videos without watermark?</span><i class="fa-solid fa-chevron-down"></i></div>
-          <div class="faq-body">Copy the TikTok video link, paste it into the box above, click GET, and select your preferred quality to download.</div>
+          <div class="faq-header" onclick="toggleFaq(this)"><span>How to download TikTok videos in 1080p, 720p or 360p?</span><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="faq-body">Copy the TikTok video link, paste it into the box above, click GET, and select your preferred resolution to download.</div>
         </div>
         <div class="faq-item">
           <div class="faq-header" onclick="toggleFaq(this)"><span>Can I convert TikTok videos to MP3?</span><i class="fa-solid fa-chevron-down"></i></div>
@@ -507,7 +506,6 @@
 
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
 
-    // FETCH WITH ALLORIGINS PROXY BYPASS
     document.getElementById('get').addEventListener('click', async () => {
       const val = document.getElementById('url').value.trim();
       if(!val || !isTikTok(val)) return showToast("Invalid TikTok Link!", "fa-triangle-exclamation");
@@ -532,7 +530,14 @@
         if (res.ok) {
           const json = await res.json();
           if (json && json.code === 0 && json.data) {
-            renderData(json.data.cover || json.data.origin_cover, json.data.title, json.data.play, json.data.music);
+            renderData(
+              json.data.cover || json.data.origin_cover, 
+              json.data.title, 
+              json.data.hdplay || json.data.play, 
+              json.data.play, 
+              json.data.wmplay || json.data.play, 
+              json.data.music
+            );
             dataFetched = true;
           }
         }
@@ -547,7 +552,7 @@
       btn.innerText = "GET"; 
     });
 
-    function renderData(thumb, title, videoUrl, audioUrl) {
+    function renderData(thumb, title, hdUrl, sdUrl, liteUrl, audioUrl) {
       const preview = document.getElementById('preview');
       const skeleton = document.getElementById('skeleton');
       const load = document.getElementById('loading');
@@ -555,13 +560,10 @@
       document.getElementById('thumb').src = thumb || 'https://files.catbox.moe/1dlcmm.jpg';
       document.getElementById('title').innerText = title || 'TikTok Video';
       
-      const hdBtn = document.getElementById('btn-hd');
-      const nowmBtn = document.getElementById('btn-nowm');
-      const mp3Btn = document.getElementById('btn-mp3');
-
-      hdBtn.href = videoUrl;
-      nowmBtn.href = videoUrl;
-      mp3Btn.href = audioUrl || videoUrl;
+      document.getElementById('btn-1080p').href = hdUrl;
+      document.getElementById('btn-720p').href = sdUrl;
+      document.getElementById('btn-360p').href = liteUrl;
+      document.getElementById('btn-mp3').href = audioUrl || sdUrl;
 
       skeleton.style.display = 'none';
       preview.style.display = 'block';
