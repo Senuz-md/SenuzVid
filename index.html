@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
+<br> <br>
+
   <script src="https://pl31035622.profitableratecpmnetwork.com/38/41/f4/3841f4ecd02428cd263942bad4dee79a.js"></script>
   <script src="https://pl31035625.profitableratecpmnetwork.com/27/09/22/270922af5d0dfa224cf0ac0814c04b43.js"></script>
   <script async="async" data-cfasync="false" src="https://pl31035623.profitableratecpmnetwork.com/50399542f1b4c8e264c1291e8c175905/invoke.js"></script>
@@ -29,6 +31,7 @@
       --border: rgba(255, 215, 0, 0.25);
     }
 
+    /* Themes */
     .theme-yellow { --ny-gold: #ffd700; --ny-orange: #f39c12; --border: rgba(255, 215, 0, 0.3); }
     .theme-blue { --ny-gold: #3498db; --ny-orange: #2980b9; --border: rgba(52, 152, 219, 0.3); }
     .theme-purple { --ny-gold: #a55eea; --ny-orange: #8854d0; --border: rgba(165, 94, 234, 0.3); }
@@ -124,8 +127,14 @@
       animation: cardPulseGlow 3s infinite ease-in-out alternate;
     }
     @keyframes cardPulseGlow {
-      0% { box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 15px var(--border); border-color: var(--border); }
-      100% { box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px var(--ny-gold); border-color: var(--ny-gold); }
+      0% {
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 15px var(--border);
+        border-color: var(--border);
+      }
+      100% {
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px var(--ny-gold);
+        border-color: var(--ny-gold);
+      }
     }
     
     .info-card { margin-top: 120px; padding: 40px 20px; }
@@ -217,7 +226,6 @@
     .btn-dl {
       background: rgba(255,255,255,0.08); border: 1px solid var(--border); color: #fff; padding: 12px;
       border-radius: 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: background 0.2s ease;
-      text-decoration: none; display: flex; align-items: center; justify-content: center; text-align: center; gap: 6px;
     }
     .btn-dl:hover { background: var(--ny-gold); color: #000; }
 
@@ -304,6 +312,7 @@
 <body class="theme-yellow">
 
   <canvas id="particles-canvas"></canvas>
+
   <div class="toast-container" id="toastContainer"></div>
 
   <header class="nav-header">
@@ -316,13 +325,27 @@
     <div class="close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></div>
     <p class="menu-title">Theme customize section 🎨</p>
     
-    <div class="theme-option" onclick="setTheme('yellow')"><div class="color-dot" style="background:#ffd700"></div> <span>Gold Theme</span></div>
-    <div class="theme-option" onclick="setTheme('blue')"><div class="color-dot" style="background:#3498db"></div> <span>Blue Theme</span></div>
-    <div class="theme-option" onclick="setTheme('purple')"><div class="color-dot" style="background:#a55eea"></div> <span>Purple Theme</span></div>
-    <div class="theme-option" onclick="setTheme('red')"><div class="color-dot" style="background:#ff4757"></div> <span>Red Theme</span></div>
-    <div class="theme-option" onclick="setTheme('neon')"><div class="color-dot" style="background:#00ff88"></div> <span>Cyberpunk Neon</span></div>
-    <div class="theme-option" onclick="setTheme('emerald')"><div class="color-dot" style="background:#2ecc71"></div> <span>Emerald Green</span></div>
-    <div class="theme-option" onclick="setTheme('sunset')"><div class="color-dot" style="background:#ff7675"></div> <span>Sunset Pink</span></div>
+    <div class="theme-option" onclick="setTheme('yellow')">
+        <div class="color-dot" style="background:#ffd700"></div> <span>Gold Theme</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('blue')">
+        <div class="color-dot" style="background:#3498db"></div> <span>Blue Theme</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('purple')">
+        <div class="color-dot" style="background:#a55eea"></div> <span>Purple Theme</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('red')">
+        <div class="color-dot" style="background:#ff4757"></div> <span>Red Theme</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('neon')">
+        <div class="color-dot" style="background:#00ff88"></div> <span>Cyberpunk Neon</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('emerald')">
+        <div class="color-dot" style="background:#2ecc71"></div> <span>Emerald Green</span>
+    </div>
+    <div class="theme-option" onclick="setTheme('sunset')">
+        <div class="color-dot" style="background:#ff7675"></div> <span>Sunset Pink</span>
+    </div>
   </div>
 
   <div class="app">
@@ -344,6 +367,7 @@
         <button class="paste-btn" id="pasteBtn" title="Paste from clipboard">
             <i class="fa-regular fa-clipboard"></i>
         </button>
+        
         <button id="get" class="get">GET</button>
       </div>
 
@@ -371,10 +395,11 @@
           <div class="v-info">
             <p id="title" class="v-title"></p>
             <div class="grid">
-              <a id="btn-1080p" class="btn-dl" target="_blank" download><i class="fa-solid fa-video"></i> 1080P HD</a>
-              <a id="btn-720p" class="btn-dl" target="_blank" download><i class="fa-solid fa-film"></i> 720P SD</a>
-              <a id="btn-360p" class="btn-dl" target="_blank" download><i class="fa-solid fa-compress"></i> 360P Lite</a>
-              <a id="btn-mp3" class="btn-dl mp3" target="_blank" download><i class="fa-solid fa-music"></i> DOWNLOAD MP3 AUDIO</a>
+              <button class="btn-dl" onclick="dl('1080p')">1080p FHD</button>
+              <button class="btn-dl" onclick="dl('720p')">720p HD</button>
+              <button class="btn-dl" onclick="dl('480p')">480p</button>
+              <button class="btn-dl" onclick="dl('360p')">360p</button>
+              <button class="btn-dl mp3" onclick="dl('audio')">DOWNLOAD MP3</button>
               <button class="btn-dl btn-qr" onclick="genQR()"><i class="fa-solid fa-qrcode"></i> GENERATE SCAN QR</button>
             </div>
           </div>
@@ -395,31 +420,62 @@
 
     <div class="card info-card">
       <div class="features-grid">
-        <div class="feature-card"><i class="fa-solid fa-ban"></i><h4>No Watermark</h4><p>Clean & High Quality</p></div>
-        <div class="feature-card"><i class="fa-solid fa-bolt"></i><h4>Ultra Fast</h4><p>Instant Direct Download</p></div>
-        <div class="feature-card"><i class="fa-solid fa-music"></i><h4>MP3 Converter</h4><p>Extract TikTok Audio</p></div>
-        <div class="feature-card"><i class="fa-solid fa-shield-halved"></i><h4>100% Free</h4><p>No Signup Needed</p></div>
+        <div class="feature-card">
+          <i class="fa-solid fa-ban"></i>
+          <h4>No Watermark</h4>
+          <p>Clean & High Quality</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-bolt"></i>
+          <h4>Ultra Fast</h4>
+          <p>Instant Direct Download</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-music"></i>
+          <h4>MP3 Converter</h4>
+          <p>Extract TikTok Audio</p>
+        </div>
+        <div class="feature-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h4>100% Free</h4>
+          <p>No Signup Needed</p>
+        </div>
       </div>
 
       <div class="faq-section">
         <div class="faq-title"><i class="fa-solid fa-circle-question"></i> How To Download</div>
+        
         <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)"><span>How to download TikTok videos in 1080p, 720p or 360p?</span><i class="fa-solid fa-chevron-down"></i></div>
-          <div class="faq-body">Copy the TikTok video link, paste it into the box above, click GET, and select your preferred resolution to download.</div>
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span>How to download TikTok videos without watermark?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-body">
+            Copy the TikTok video link, paste it into the box above, click GET, and select your preferred quality to download.
+          </div>
         </div>
+
         <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)"><span>Can I convert TikTok videos to MP3?</span><i class="fa-solid fa-chevron-down"></i></div>
-          <div class="faq-body">Yes! Click the "DOWNLOAD MP3 AUDIO" button after fetching the video details to save high-quality audio.</div>
+          <div class="faq-header" onclick="toggleFaq(this)">
+            <span>Can I convert TikTok videos to MP3?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-body">
+            Yes! Click the "DOWNLOAD MP3" button after fetching the video details to save high-quality audio.
+          </div>
         </div>
       </div>
 
       <div class="foot">ᴘᴏᴡᴇʀᴅ ʙʏ┋<span class="senuz">© ꜱᴇɴᴜᴢ ⑉〆</span></div>
     </div>
+
   </div>
 
   <div class="music-container">
     <div class="eq-bars" id="eqBars">
-      <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
     </div>
     <button id="musicToggle" class="music"><i class="fa-solid fa-music"></i></button>
   </div>
@@ -475,7 +531,9 @@
     resizeCanvas();
 
     const particles = [];
-    for (let i = 0; i < 45; i++) {
+    const particleCount = 45;
+
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -489,19 +547,29 @@
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const currentColor = getComputedStyle(document.body).getPropertyValue('--ny-gold').trim() || '#ffd700';
+
       particles.forEach(p => {
-        p.y -= p.speedY; p.x += p.speedX;
-        if (p.y < 0) { p.y = canvas.height; p.x = Math.random() * canvas.width; }
+        p.y -= p.speedY;
+        p.x += p.speedX;
+
+        if (p.y < 0) {
+          p.y = canvas.height;
+          p.x = Math.random() * canvas.width;
+        }
+
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = currentColor;
         ctx.globalAlpha = p.alpha;
         ctx.fill();
       });
+
       requestAnimationFrame(drawParticles);
     }
     drawParticles();
 
+    // Direct Backend Connection Link
+    const API = "http://kod.publicvm.com:2035";
     let currentUrl = "";
 
     function isTikTok(url) { return url.includes('tiktok.com') || url.includes('vm.tiktok'); }
@@ -522,53 +590,32 @@
       skeleton.style.display = 'block';
       document.getElementById('qrcode-container').style.display = 'none';
 
-      let dataFetched = false;
-
       try {
-        const targetApi = `https://www.tikwm.com/api/?url=${encodeURIComponent(val)}`;
-        const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(targetApi)}`);
-        if (res.ok) {
-          const json = await res.json();
-          if (json && json.code === 0 && json.data) {
-            renderData(
-              json.data.cover || json.data.origin_cover, 
-              json.data.title, 
-              json.data.hdplay || json.data.play, 
-              json.data.play, 
-              json.data.wmplay || json.data.play, 
-              json.data.music
-            );
-            dataFetched = true;
-          }
-        }
-      } catch (e) { console.warn("Proxy Fetch Error..."); }
+        const res = await fetch(`${API}/api/details?url=${encodeURIComponent(val)}`);
+        
+        if (!res.ok) throw new Error("Connection failed!");
 
-      if (!dataFetched) {
+        const data = await res.json();
+        document.getElementById('thumb').src = data.thumbnail;
+        document.getElementById('title').innerText = data.title;
         skeleton.style.display = 'none';
-        load.innerText = "Fetch Error. Please check link."; 
-        showToast("Connection failed! Try again.", "fa-circle-xmark");
+        preview.style.display = 'block';
+        load.innerText = "";
+        showToast("Video fetched successfully!");
+      } catch(e) { 
+        console.error("Full Error:", e);
+        skeleton.style.display = 'none';
+        load.innerText = "Error: " + e.message; 
+        showToast("Failed to fetch video details", "fa-circle-xmark");
+      } finally { 
+        btn.innerText = "GET"; 
       }
-
-      btn.innerText = "GET"; 
     });
 
-    function renderData(thumb, title, hdUrl, sdUrl, liteUrl, audioUrl) {
-      const preview = document.getElementById('preview');
-      const skeleton = document.getElementById('skeleton');
-      const load = document.getElementById('loading');
-
-      document.getElementById('thumb').src = thumb || 'https://files.catbox.moe/1dlcmm.jpg';
-      document.getElementById('title').innerText = title || 'TikTok Video';
-      
-      document.getElementById('btn-1080p').href = hdUrl;
-      document.getElementById('btn-720p').href = sdUrl;
-      document.getElementById('btn-360p').href = liteUrl;
-      document.getElementById('btn-mp3').href = audioUrl || sdUrl;
-
-      skeleton.style.display = 'none';
-      preview.style.display = 'block';
-      load.innerText = "";
-      showToast("Video fetched successfully!");
+    function dl(q) {
+      if(!currentUrl) return;
+      window.open(`${API}/api/download?url=${encodeURIComponent(currentUrl)}&quality=${q}`, '_blank');
+      showToast(`Starting ${q} Download...`, "fa-download");
     }
 
     function genQR() {
@@ -610,12 +657,24 @@
     const audio = document.getElementById('player');
     const eqBars = document.getElementById('eqBars');
 
-    audio.onplay = () => { eqBars.classList.add('active'); document.body.classList.add('playing-music'); };
-    audio.onpause = () => { eqBars.classList.remove('active'); document.body.classList.remove('playing-music'); };
+    audio.onplay = () => {
+      eqBars.classList.add('active');
+      document.body.classList.add('playing-music');
+    };
+
+    audio.onpause = () => {
+      eqBars.classList.remove('active');
+      document.body.classList.remove('playing-music');
+    };
 
     mBtn.addEventListener('click', () => {
-      if(audio.paused) { audio.play(); mBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; } 
-      else { audio.pause(); mBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; }
+      if(audio.paused) { 
+        audio.play(); 
+        mBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; 
+      } else { 
+        audio.pause(); 
+        mBtn.innerHTML = '<i class="fa-solid fa-music"></i>'; 
+      }
     });
   </script>
 </body>
